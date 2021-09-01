@@ -57,59 +57,59 @@ Thing: Car Wash
  */
 
 /*
-Thing 1)
+Thing 1) electric Guitar
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of strings
+    2) number of pickups
+    3) color
+    4) age
+    5) price
 3 things it can do:
-    1)
-    2)
-    3)
+    1) generate a Note
+    2) break a String
+    3) tune
  */
 
 /*
-Thing 2)
+Thing 2) computer
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) amount of ram
+    2) processor-speed
+    3) size of disk
+    4) manufacturer
+    5) operating system
 3 things it can do:
-    1)
-    2)
-    3)
+    1) run program
+    2) shut down
+    3) erase disk
  */
 
 /*
-Thing 3)
+Thing 3) bus
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) maximum speed
+    2) number of seats
+    3) manufacturer
+    4) fuel consumption
+    5) color
 3 things it can do:
-    1)
-    2)
-    3)
+    1) start engine
+    2) turn left
+    3) open doors
  */
 
 /*
-Thing 4)
+Thing 4) mobile phone
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) size of memory
+    2) size of screen
+    3) manufacturer
+    4) type of camera
+    5) year of manufacture
 3 things it can do:
-    1)
-    2)
-    3)
+    1) send message
+    2) charge
+    3) update operating system
  */
 
 
