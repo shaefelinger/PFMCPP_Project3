@@ -80,75 +80,7 @@ Part1 will be broken up into 5 separate steps
 3) move Thing 5-9 to between your Thing 4 and Thing 10.
 */
 
-/*
-Thing 5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
 
-/*
-Thing 6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
 
 
 
@@ -211,11 +143,81 @@ Thing 4) mobile phone
  */
 
 /*
+Thing 5) screen
+5 properties:
+    1) width (float)
+    2) height (height)
+    3) number of pixels (int)
+    4) type (std::string)
+    5) refresh rate (int)
+3 things it can do:
+    1) display image
+    2) change brightness
+    3) change contrast
+ */
+
+/*
+Thing 6) remote control
+5 properties:
+    1) number of knobs (int)
+    2) color (std::string)
+    3) type (std::string)
+    4) size (float)
+    5) range (float)
+3 things it can do:
+    1) turn tv on
+    2) change channel
+    3) change volume
+ */
+
+/*
+Thing 7) connectors
+5 properties:
+    1) number of hdmi-inputs (int)
+    2) number of heatphone-putputs (int)
+    3) type of digital-out (std::string)
+    4) hasScartConnector (bool)
+    5) type of power connector (std::string)
+3 things it can do:
+    1) output audio
+    2) connect to antenna
+    3) connect to power
+ */
+
+/*
+Thing 8) on screen menu
+5 properties:
+    1) size (float)
+    2) number of menu-elements (int)
+    3) color (std::string)
+    4) number of languages (int)
+    5) default language (std::string)
+3 things it can do:
+    1) show Netflix 
+    2) show TV-Guide
+    3) activate recording
+ */
+
+/*
+Thing 9)
+5 properties: manufacturer
+    1) name (float)
+    2) headquarters location (std::string)
+    3) founding year (int)
+    4) name of founder (std::string)
+    5) annual profit (float)
+3 things it can do:
+    1) go bankrupt
+    2) release new model
+    3) buy rival company
+ */ 
+
+/*
 Thing 10) tv
 5 properties:
     1) screen 
     2) remote control
-    3) inputs
+    3) connectors
     4) on screen menu
     5) manufacturer
 3 things it can do:
