@@ -65,17 +65,17 @@ Part1 will be broken up into 5 separate steps
 */
 
 /*
-Thing 10)
+Thing 10) tv
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) screen diagonal (float)
+    2) brand (std::string)
+    3) price (float)
+    4) number of inputs (int)
+    5) screen resolution - pixels (int)
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change channel
+    2) change volume
+    3) activate smart tv
  */
 
 
