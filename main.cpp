@@ -64,31 +64,15 @@ Part1 will be broken up into 5 separate steps
 3) Move the Thing 10 pseudo-code to after your Thing1-4 in the project.
 */
 
-/*
-Thing 10) tv
-5 properties:
-    1) screen diagonal (float)
-    2) brand (std::string)
-    3) price (float)
-    4) number of inputs (int)
-    5) screen resolution - pixels (int)
-3 things it can do:
-    1) change channel
-    2) change volume
-    3) activate smart tv
- */
-
-
-
 
 /*
 Thing 1) electric Guitar
 5 properties:
-    1) number of strings
-    2) number of pickups
-    3) color
-    4) age
-    5) price
+    1) number of strings (int)
+    2) number of pickups (int)
+    3) color (std::string)
+    4) age (int)
+    5) price (float)
 3 things it can do:
     1) generate a Note
     2) break a String
@@ -98,11 +82,11 @@ Thing 1) electric Guitar
 /*
 Thing 2) computer
 5 properties:
-    1) amount of ram
-    2) processor-speed
-    3) size of disk
-    4) manufacturer
-    5) operating system
+    1) amount of ram (int)
+    2) processor-speed (float)
+    3) size of disk (int)
+    4) manufacturer (std::string)
+    5) operating system (std::string)
 3 things it can do:
     1) run program
     2) shut down
@@ -112,11 +96,11 @@ Thing 2) computer
 /*
 Thing 3) bus
 5 properties:
-    1) maximum speed
-    2) number of seats
-    3) manufacturer
-    4) fuel consumption
-    5) color
+    1) maximum speed (int)
+    2) number of seats (int)
+    3) manufacturer (std::string)
+    4) fuel consumption (float)
+    5) color (std::string)
 3 things it can do:
     1) start engine
     2) turn left
@@ -126,18 +110,30 @@ Thing 3) bus
 /*
 Thing 4) mobile phone
 5 properties:
-    1) size of memory
-    2) size of screen
-    3) manufacturer
-    4) type of camera
-    5) year of manufacture
+    1) size of memory (int)
+    2) size of screen (int)
+    3) manufacturer (std::string)
+    4) type of camera (std::string)
+    5) year of manufacture (int)
 3 things it can do:
     1) send message
     2) charge
     3) update operating system
  */
 
-
+/*
+Thing 10) tv
+5 properties:
+    1) screen 
+    2) remote control
+    3) inputs
+    4) on screen menu
+    5) manufacturer
+3 things it can do:
+    1) change channel
+    2) change volume
+    3) activate smart tv
+ */
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
