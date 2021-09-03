@@ -159,14 +159,22 @@ Thing 1) electric Guitar
 struct electricGuitar
 {
     // number of strings (int)
+    int numberOfStrings = 6;
     // number of pickups (int)
+    int numberOfPickups = 2;
     // color (std::string)
+    std::string color = "blue";
     // age (int)
+    int age = 12;
     // price (float)
+    float price = 1299.99f;
 
     // generate a Note
+    void generateNote(int noteNumber);
     // break a String
+    void breakString(int stringNumber);
     // tune
+    void tune(int stringNumber, float referencePitch); 
 };
 
 /*
@@ -184,15 +192,23 @@ Thing 2) computer
  */
 struct computer
 {
-    // amount of ram (int)
-    // processor-speed (float)
-    // size of disk (int)
+    // amount of ram (int) in gigabyte
+    int amountOfRam = 64;
+    // processor-speed (float)in GHz
+    float processorSpeed = 2.4f;
+    // size of disk (int) in terrabyte
+    int sizeOfDisk = 4;
     // manufacturer (std::string)
+    std::string manufacturer = "Apple";
     // operating system (std::string)
+    std::string operatingSystem = "MacOS";
 
     // run program
+    void runProgram(std::string program, int priority);
     // shut down
+    void shutDown();
     // erase disk
+    void eraseDisk(std::string volumeName);
 };
 
 /*
@@ -211,14 +227,21 @@ Thing 3) bus
 struct bus
 {
     // maximum speed (int)
+    int maximumSpeed = 100;
     // number of seats (int)
+    int numberOfSeets = 18;
     // manufacturer (std::string)
+    std::string manufacturer = "MAN";
     // fuel consumption (float)
+    float fuelConsumption = 20.3f;
     // color (std::string)
 
     // start engine
+    void startEngine();
     // turn left
+    void turnLeft(int angle);
     // open doors
+    void openDoors(bool openAllDoors);
 };
 
 /*
@@ -238,14 +261,22 @@ Thing 4) mobile phone
 struct mobilePhone
 {
     // size of memory (int)
+    int sizeOfMemory = 2;
     // size of screen (int)
+    int sizeOfScreen = 2;
     // manufacturer (std::string)
+    std::string manufacturer = "Nokia";
     // type of camera (std::string)
+    std::string typeOfCamera = "none";
     // year of manufacture (int)
+    int yearOfManufacture = 1995;
 
     // send message
+    void sendMessage(std::string message);
     // charge
+    void charge(); 
     // update operating system
+    bool updateOperatingSystem(float osVersion);
 };
 
 /*
@@ -265,14 +296,22 @@ Thing 5) screen
 struct tvScreen
 {
     // width (float)
-    // height (height)
+    float tvScreen = 62.3f;
+    // height (float)
+    float height = 33.4f;
     // number of pixels (int)
+    int numberOfPixels = 921600;
     // type (std::string)
+    std::string type = "LED";
     // refresh rate (int)
+    int refreshRate = 60;
 
     // display image
+    void displayImage(std::string imgName = "defaultImage");
     // change brightness
+    void changeBrightness(float brightness);
     // change contrast
+    void changeContrast(float contrast);
 }; 
 
 /*
@@ -292,14 +331,22 @@ Thing 6) remote control
 struct tvRemoteControl
 {
     // number of knobs (int)
+    int numberOfKnobs = 22;
     // color (std::string)
+    std::string color = "black";
     // type (std::string)
+    std::string type = "infrared";
     // size (float)
+    float size = 10.2f;
     // range (float)
+    float range = 20.4f;
 
     // turn tv on
+    void turnTvOn(int inputNumber = 0, int channelNumber = 1);
     // change channel
+    void changeChannel(int channelNumber = 1);
     // change volume
+    void changeVolume(float newVolume = 3.2f);
 };
 /*
 Thing 7) connectors
@@ -318,14 +365,22 @@ Thing 7) connectors
 struct tvConnectors
 {
     // number of hdmi-inputs (int)
+    int numberHdmiInputs = 2;
     // number of heatphone-putputs (int)
+    int numberHeadphoneOuts = 3;
     // type of digital-out (std::string)
+    std::string digitalOutType = "spdif";
     // hasScartConnector (bool)
+    bool hasScartConnector = false;
     // type of power connector (std::string)
+    std::string powerConnectorType = "external";
 
     // output audio
+    void outputAudio(float volume = 6.2f, int output = 2);
     // connect to antenna
+    bool connectToAntenna();
     // connect to power
+    bool connectToPower(int powerSocket = 0);
 };
 
 /*
@@ -345,6 +400,7 @@ Thing 8) on screen menu
 struct tvOnScreenMenu
 {
     // size (float)
+    float size = 10.4f;
     // number of menu-elements (int)
     // color (std::string)
     // number of languages (int)
