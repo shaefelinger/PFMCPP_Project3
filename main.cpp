@@ -156,6 +156,19 @@ Thing 1) electric Guitar
     3) tune
  */
 
+struct electricGuitar
+{
+    // number of strings (int)
+    // number of pickups (int)
+    // color (std::string)
+    // age (int)
+    // price (float)
+
+    // generate a Note
+    // break a String
+    // tune
+};
+
 /*
 Thing 2) computer
 5 properties:
@@ -169,6 +182,18 @@ Thing 2) computer
     2) shut down
     3) erase disk
  */
+struct computer
+{
+    // amount of ram (int)
+    // processor-speed (float)
+    // size of disk (int)
+    // manufacturer (std::string)
+    // operating system (std::string)
+
+    // run program
+    // shut down
+    // erase disk
+};
 
 /*
 Thing 3) bus
@@ -183,6 +208,18 @@ Thing 3) bus
     2) turn left
     3) open doors
  */
+struct bus
+{
+    // maximum speed (int)
+    // number of seats (int)
+    // manufacturer (std::string)
+    // fuel consumption (float)
+    // color (std::string)
+
+    // start engine
+    // turn left
+    // open doors
+};
 
 /*
 Thing 4) mobile phone
@@ -198,6 +235,19 @@ Thing 4) mobile phone
     3) update operating system
  */
 
+struct mobilePhone
+{
+    // size of memory (int)
+    // size of screen (int)
+    // manufacturer (std::string)
+    // type of camera (std::string)
+    // year of manufacture (int)
+
+    // send message
+    // charge
+    // update operating system
+};
+
 /*
 Thing 5) screen
 5 properties:
@@ -211,6 +261,19 @@ Thing 5) screen
     2) change brightness
     3) change contrast
  */
+
+struct tvScreen
+{
+    // width (float)
+    // height (height)
+    // number of pixels (int)
+    // type (std::string)
+    // refresh rate (int)
+
+    // display image
+    // change brightness
+    // change contrast
+}; 
 
 /*
 Thing 6) remote control
@@ -226,6 +289,18 @@ Thing 6) remote control
     3) change volume
  */
 
+struct tvRemoteControl
+{
+    // number of knobs (int)
+    // color (std::string)
+    // type (std::string)
+    // size (float)
+    // range (float)
+
+    // turn tv on
+    // change channel
+    // change volume
+};
 /*
 Thing 7) connectors
 5 properties:
@@ -239,6 +314,19 @@ Thing 7) connectors
     2) connect to antenna
     3) connect to power
  */
+
+struct tvConnectors
+{
+    // number of hdmi-inputs (int)
+    // number of heatphone-putputs (int)
+    // type of digital-out (std::string)
+    // hasScartConnector (bool)
+    // type of power connector (std::string)
+
+    // output audio
+    // connect to antenna
+    // connect to power
+};
 
 /*
 Thing 8) on screen menu
@@ -254,6 +342,19 @@ Thing 8) on screen menu
     3) activate recording
  */
 
+struct tvOnScreenMenu
+{
+    // size (float)
+    // number of menu-elements (int)
+    // color (std::string)
+    // number of languages (int)
+    // default language (std::string)
+
+    // show Netflix 
+    // show TV-Guide
+    // activate recording
+};
+
 /*
 Thing 9)
 5 properties: manufacturer
@@ -268,6 +369,19 @@ Thing 9)
     3) buy rival company
  */ 
 
+struct tvManufacturer
+{
+    // name (float)
+    // headquarters location (std::string)
+    // founding year (int)
+    // name of founder (std::string)
+    // annual profit (float)
+
+    // go bankrupt
+    // release new model
+    // buy rival company
+};
+
 /*
 Thing 10) tv
 5 properties:
@@ -281,6 +395,19 @@ Thing 10) tv
     2) change volume
     3) activate smart tv
  */
+
+struct tv
+{
+    // screen 
+    // remote control
+    // connectors
+    // on screen menu
+    // manufacturer
+
+    // change channel
+    // change volume
+    // activate smart tv
+};
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
