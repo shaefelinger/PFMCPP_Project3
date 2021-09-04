@@ -136,12 +136,6 @@ struct CarWash //                                   1) define an empty struct fo
 };
 
 
-
-
-
-
-
-
 /*
 Thing 1) electric Guitar
 5 properties:
@@ -156,7 +150,7 @@ Thing 1) electric Guitar
     3) tune
  */
 
-struct electricGuitar
+struct ElectricGuitar
 {
     // number of strings (int)
     int numberOfStrings = 6;
@@ -169,12 +163,27 @@ struct electricGuitar
     // price (float)
     float price = 1299.99f;
 
+    struct GuitarString
+    {
+        std::string manufacturer = "Ernie Ball";
+        int number = 0;
+        bool isWound = true;
+        float width = 0.52f;
+        std::string material = "steel";
+
+        void breakString();
+        void tune (float pitch);
+        void pluck(int fret); 
+    };
+
     // generate a Note
-    void generateNote(int noteNumber);
+    void generateNote(GuitarString string, int fretPosition);
     // break a String
-    void breakString(int stringNumber);
+    void breakString(GuitarString stringNumber);
     // tune
-    void tune(int stringNumber, float referencePitch); 
+    void tune(GuitarString stringNumber, float referencePitch); 
+
+    GuitarString string; 
 };
 
 /*
@@ -190,7 +199,7 @@ Thing 2) computer
     2) shut down
     3) erase disk
  */
-struct computer
+struct Computer
 {
     // amount of ram (int) in gigabyte
     int amountOfRam = 64;
@@ -203,12 +212,27 @@ struct computer
     // operating system (std::string)
     std::string operatingSystem = "MacOS";
 
+    struct Application
+    {
+        std::string name = "Logic Pro";
+        std::string manufacturer = "Apple";
+        std::string appType = "audio";
+        float size = 1.1f;
+        std::string version = "10.5";
+
+        void start();
+        void close();
+        void install(std::string filePath);
+    };
+
     // run program
-    void runProgram(std::string program, int priority);
+    void runProgram(Application program, int priority);
     // shut down
     void shutDown();
     // erase disk
     void eraseDisk(std::string volumeName);
+
+    Application application;
 };
 
 /*
@@ -224,7 +248,7 @@ Thing 3) bus
     2) turn left
     3) open doors
  */
-struct bus
+struct Bus
 {
     // maximum speed (int)
     int maximumSpeed = 100;
@@ -258,7 +282,7 @@ Thing 4) mobile phone
     3) update operating system
  */
 
-struct mobilePhone
+struct MobilePhone
 {
     // size of memory (int)
     int sizeOfMemory = 2;
@@ -293,10 +317,10 @@ Thing 5) screen
     3) change contrast
  */
 
-struct tvScreen
+struct TvScreen
 {
     // width (float)
-    float tvScreen = 62.3f;
+    float width = 62.3f;
     // height (float)
     float height = 33.4f;
     // number of pixels (int)
@@ -328,7 +352,7 @@ Thing 6) remote control
     3) change volume
  */
 
-struct tvRemoteControl
+struct TvRemoteControl
 {
     // number of knobs (int)
     int numberOfKnobs = 22;
@@ -362,7 +386,7 @@ Thing 7) connectors
     3) connect to power
  */
 
-struct tvConnectors
+struct TvConnectors
 {
     // number of hdmi-inputs (int)
     int numberHdmiInputs = 2;
@@ -397,18 +421,25 @@ Thing 8) on screen menu
     3) activate recording
  */
 
-struct tvOnScreenMenu
+struct TvOnScreenMenu
 {
     // size (float)
     float size = 10.4f;
     // number of menu-elements (int)
+    int menuElements = 12;
     // color (std::string)
+    std::string color = "gray";
     // number of languages (int)
+    int numberOfLanguages = 9;
     // default language (std::string)
+    std::string language = "english";
 
     // show Netflix 
+    void showNetflix(std::string showTitle, int season, int episode);
     // show TV-Guide
+    void showTVGuide(int week);
     // activate recording
+    void activateRecoding(int channel);
 };
 
 /*
@@ -425,17 +456,25 @@ Thing 9)
     3) buy rival company
  */ 
 
-struct tvManufacturer
+struct TvManufacturer
 {
     // name (float)
+    std::string name = "SONY";
     // headquarters location (std::string)
+    std::string headquartersLocation = "Japan";
     // founding year (int)
+    int foundingYear = 1946;
     // name of founder (std::string)
+    std::string founder = "Masaru Ibuka";
     // annual profit (float)
+    float annualProfit = 1178.8f;
 
     // go bankrupt
+    void goBankrupt(bool payAllDebts);
     // release new model
+    bool releasNewModel(std::string modelName, float price);
     // buy rival company
+    bool buyRivalCompany(std:: string company, float price);
 };
 
 /*
@@ -452,17 +491,25 @@ Thing 10) tv
     3) activate smart tv
  */
 
-struct tv
+struct Tv
 {
     // screen 
+    TvScreen screen;
     // remote control
+    TvRemoteControl remoteControl;
     // connectors
+    TvConnectors connectors;
     // on screen menu
+    TvOnScreenMenu onScreenMenu;
     // manufacturer
+    TvManufacturer manufacturer;
 
     // change channel
+    void changeChannel(int channelNumber, bool useRemoteControl);
     // change volume
+    void changeVolume(float newVolume, bool useRemoteControl);
     // activate smart tv
+    void activateSmartTv(int menuItem = 0);
 };
 
 /*
