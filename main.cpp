@@ -151,7 +151,6 @@ void Person::run(bool startWithLeftFoot)
     distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();      
 }
 
-
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
     If you have warnings about 'unused parameter', you aren't using one of your function parameters in your implementation.
@@ -182,16 +181,49 @@ struct ElectricGuitar
         std::string material = "steel";
 
         void breakString();
-        void tune (float pitch);
-        void pluck(int fret); 
+        void tuneString (float pitch);
+        void pluckString(int fret); 
     };
 
-    void generateNote(GuitarString string, int fretPosition);
-    void breakString(GuitarString stringNumber);
-    void tune(GuitarString stringNumber, float referencePitch); 
+    void generateNote(int string, int fretPosition);
+    void pluck(int stringNumber);
+    void tune(int stringNumber, float referencePitch); 
 
-    GuitarString string; 
+    GuitarString firstString; 
 };
+
+void ElectricGuitar::generateNote(int string, int fretPosition)
+{
+    string = 2; // to avoid 'unused parameter'
+    fretPosition = 4;
+}
+
+void ElectricGuitar::pluck(int stringNumber)
+{
+    stringNumber = 0;
+}
+
+void ElectricGuitar::tune(int stringNumber, float referencePitch)
+{
+    stringNumber = 2;
+    referencePitch= 440.0f;
+}
+
+void ElectricGuitar::GuitarString::breakString()
+{
+    //
+}
+
+void ElectricGuitar::GuitarString::tuneString(float pitch)
+{
+    pitch = 440.0f;
+}
+
+void ElectricGuitar::GuitarString::pluckString(int fret)
+{
+    fret = 12;
+}
+
 
 struct Computer
 {
@@ -214,12 +246,28 @@ struct Computer
         void install(std::string filePath);
     };
 
-    void runProgram(Application program, int priority);
+    void runProgram(std::string program, int priority);
     void shutDown();
     void eraseDisk(std::string volumeName);
 
     Application application;
 };
+
+void Computer::runProgram(std::string program, int priority)
+{
+    program = "ProTools";
+    priority = 0;
+}
+
+void Computer::shutDown()
+{
+    //
+}
+
+void eraseDisk(std::string volumeName)
+{
+    volumeName = "deleted volume";
+}
 
 struct Bus
 {
@@ -232,6 +280,7 @@ struct Bus
     void turnLeft(int angle);
     void openDoors(bool openAllDoors);
 };
+
 
 struct MobilePhone
 {
