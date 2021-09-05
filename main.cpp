@@ -356,9 +356,19 @@ struct TvScreen
     void changeContrast(float contrast);
 }; 
 
-void TvScreen::displayImage(std::string imgName = "defaultImage")
+void TvScreen::displayImage(std::string imgName)
 {
-    //
+    imgName = "funnyCat";
+}
+
+void TvScreen::changeBrightness(float brightness)
+{
+    brightness = 43.2f;
+}
+
+void TvScreen::changeContrast(float contrast)
+{
+    contrast = 82.3f;
 }
 
 
@@ -372,8 +382,25 @@ struct TvRemoteControl
 
     void turnTvOn(int inputNumber = 0, int channelNumber = 1);
     void changeChannel(int channelNumber = 1);
-    void changeVolume(float newVolume = 3.2f);
+    void changeVolume(float newVolume);
 };
+
+void TvRemoteControl::turnTvOn(int inputNumber, int channelNumber)
+{
+    inputNumber = 5;
+    channelNumber = 123;
+}
+
+void TvRemoteControl::changeChannel(int channelNumber)
+{
+    channelNumber = 2;
+}
+
+void TvRemoteControl::changeVolume(float newVolume = 3.2f)
+{
+    newVolume = 6.4f;
+}
+
 
 struct TvConnectors
 {
@@ -388,6 +415,24 @@ struct TvConnectors
     bool connectToPower(int powerSocket = 0);
 };
 
+void TvConnectors::outputAudio(float volume, int output)
+{
+    volume = 7.2f;
+    output = 2;
+}
+
+bool TvConnectors::connectToAntenna()
+{
+    return true;
+}
+
+bool connectToPower(int powerSocket)
+{
+    powerSocket = 1;
+    return false;
+}
+
+
 struct TvOnScreenMenu
 {
     float size = 10.4f;
@@ -400,6 +445,24 @@ struct TvOnScreenMenu
     void showTVGuide(int week);
     void activateRecoding(int channel);
 };
+
+void TvOnScreenMenu::showNetflix(std::string showTitle, int season, int episode)
+{
+    showTitle = "Breaking Bad";
+    season = 2;
+    episode = 5;
+}
+
+void TvOnScreenMenu::showTVGuide(int week)
+{
+    week = 22;
+}
+
+void TvOnScreenMenu::activateRecoding(int channel)
+{
+    channel += 1;
+}
+
 
 struct TvManufacturer
 {
@@ -414,6 +477,29 @@ struct TvManufacturer
     bool buyRivalCompany(std:: string company, float price);
 };
 
+void TvManufacturer::goBankrupt(bool payAllDebts)
+{
+    if (payAllDebts)
+    {
+        payAllDebts = false;
+    } // they will never pay the debts ;-)
+}
+
+bool TvManufacturer::releasNewModel(std::string modelName, float price)
+{
+    modelName = "XYZ123";
+    price += 200;
+    return true;
+}
+
+bool buyRivalCompany(std:: string company, float price)
+{
+    company = "Samsung";
+    price = 1.99f;
+    return false;
+}
+
+
 struct Tv
 {
     TvScreen screen;
@@ -426,6 +512,25 @@ struct Tv
     void changeVolume(float newVolume, bool useRemoteControl);
     void activateSmartTv(int menuItem = 0);
 };
+
+void Tv::changeChannel(int channelNumber, bool useRemoteControl)
+{
+    if (useRemoteControl)
+    {
+        channelNumber++;
+    }
+}
+
+void Tv::changeVolume(float newVolume, bool useRemoteControl)
+{
+    newVolume = 3.3f;
+    useRemoteControl = false;
+}
+
+void Tv::activateSmartTv(int menuItem)
+{
+    menuItem++;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
