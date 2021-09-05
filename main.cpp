@@ -269,6 +269,22 @@ void eraseDisk(std::string volumeName)
     volumeName = "deleted volume";
 }
 
+void Computer::Application::start()
+{
+    //
+}
+
+void Computer::Application::close()
+{
+    //
+}
+
+void Computer::Application::install(std::string filePath)
+{
+    filePath = "Macintosh HD";
+}
+
+
 struct Bus
 {
     int maximumSpeed = 100;
@@ -280,6 +296,21 @@ struct Bus
     void turnLeft(int angle);
     void openDoors(bool openAllDoors);
 };
+
+void Bus::startEngine()
+{
+    //
+}
+
+void Bus::turnLeft(int angle)
+{
+    angle = 30;
+}
+
+void Bus::openDoors(bool openAllDoors)
+{
+    openAllDoors = true;
+}
 
 
 struct MobilePhone
@@ -295,6 +326,23 @@ struct MobilePhone
     bool updateOperatingSystem(float osVersion);
 };
 
+void MobilePhone::sendMessage(std::string message)
+{
+    message = "Hello";
+}
+
+void MobilePhone::charge()
+{
+    //
+}
+
+bool MobilePhone::updateOperatingSystem(float osVersion)
+{
+    osVersion = 11.5;
+    return true;
+}
+
+
 struct TvScreen
 {
     float width = 62.3f;
@@ -307,6 +355,12 @@ struct TvScreen
     void changeBrightness(float brightness);
     void changeContrast(float contrast);
 }; 
+
+void TvScreen::displayImage(std::string imgName = "defaultImage")
+{
+    //
+}
+
 
 struct TvRemoteControl
 {
