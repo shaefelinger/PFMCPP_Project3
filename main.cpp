@@ -212,6 +212,11 @@ void ElectricGuitar::changeVolume(float volume)
 void ElectricGuitar::GuitarString::breakString()
 {
     std::cout << "String " << ElectricGuitar::GuitarString::number << " just broke!!" << std::endl;
+    if (ElectricGuitar::GuitarString::isWound)
+    {
+        std::cout << "This is a wound string - how did that happen??" << std::endl;;
+    }
+    
 }
 
 void ElectricGuitar::GuitarString::tuneString(float referencePitch)
@@ -255,18 +260,17 @@ struct Computer
 
 void Computer::runProgram(std::string program, int priority)
 {
-    program = "ProTools";
-    priority = 0;
+    std::cout << "Running " << program << " with priority " << priority << std::endl;
 }
 
 void Computer::shutDown()
 {
-    //
+    std::cout << "Computer shut down." << std::endl;
 }
 
 void eraseDisk(std::string volumeName)
 {
-    volumeName = "deleted volume";
+    std::cout << "Erased Disk " << volumeName << std::endl;
 }
 
 void Computer::Application::start()
@@ -549,6 +553,10 @@ void Tv::activateSmartTv(int menuItem)
 #include <iostream>
 int main()
 {
+    Person runner;
+    runner.run(false);
+    std::cout << "============================================================" << std::endl;
+
     ElectricGuitar telecaster;
     telecaster.plugIn("green");
     telecaster.selectPickup(1);
@@ -556,7 +564,12 @@ int main()
     telecaster.string1.breakString();
     telecaster.string1.tuneString(442.2f);
     telecaster.string1.pluckString(12);
-    std::cout << "==============================" << std::endl;
-    
+    std::cout << "============================================================" << std::endl;
+
+    Computer macbook;
+    macbook.runProgram("Ableton", 10);
+    macbook.shutDown();
+    macbook.eraseDisk("Macintosh HD");
+
     std::cout << "good to go!" << std::endl;
 }
