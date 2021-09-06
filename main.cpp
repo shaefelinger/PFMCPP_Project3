@@ -166,6 +166,8 @@ void Person::run(bool startWithLeftFoot)
  if your code produces a -Wpadded warning, add '-Wno-padded' to the .replit file with the other compiler flags (-Weverything -Wno-missing-prototypes etc etc)
  */
 
+
+// ============================================================
 struct ElectricGuitar
 {
     int numberOfStrings = 6;
@@ -216,7 +218,6 @@ void ElectricGuitar::GuitarString::breakString()
     {
         std::cout << "This is a wound string - how did that happen??" << std::endl;;
     }
-    
 }
 
 void ElectricGuitar::GuitarString::tuneString(float referencePitch)
@@ -229,7 +230,7 @@ void ElectricGuitar::GuitarString::pluckString(int fret)
     std::cout << "Plucked String " << ElectricGuitar::GuitarString::number << " / fret " << fret << std::endl;
 }
 
-
+// ============================================================
 struct Computer
 {
     int amountOfRam = 64;
@@ -255,7 +256,7 @@ struct Computer
     void shutDown();
     void eraseDisk(std::string volumeName);
 
-    Application application;
+    Application logicPro;
 };
 
 void Computer::runProgram(std::string program, int priority)
@@ -265,29 +266,29 @@ void Computer::runProgram(std::string program, int priority)
 
 void Computer::shutDown()
 {
-    std::cout << "Computer shut down." << std::endl;
+    std::cout << "Computer shut down!" << std::endl;
 }
 
-void eraseDisk(std::string volumeName)
+void Computer::eraseDisk(std::string volumeName)
 {
     std::cout << "Erased Disk " << volumeName << std::endl;
 }
 
 void Computer::Application::start()
 {
-    //
+    std::cout << Computer::Application::name << " started" << std::endl;
 }
 
 void Computer::Application::close()
 {
-    //
+    std::cout << Computer::Application::name << " closed" << std::endl;
 }
 
 void Computer::Application::install(std::string filePath)
 {
-    filePath = "Macintosh HD";
+    std::cout << Computer::Application::name << " installed on " << filePath << std::endl;
 }
-
+// ============================================================
 
 struct Bus
 {
@@ -303,19 +304,26 @@ struct Bus
 
 void Bus::startEngine()
 {
-    //
+    std::cout << "Engine of Bus started" << std::endl;
 }
 
 void Bus::turnLeft(int angle)
 {
-    angle = 30;
+    std::cout << "Turned left " << angle << " degrees" << std::endl;
 }
 
 void Bus::openDoors(bool openAllDoors)
 {
-    openAllDoors = true;
+    if(openAllDoors)
+    {
+        std::cout << "Opened all doors" << std::endl;
+    }
+    else 
+    {
+        std::cout << "Opened a single door" << std::endl;
+    }
 }
-
+// ============================================================
 
 struct MobilePhone
 {
@@ -332,20 +340,20 @@ struct MobilePhone
 
 void MobilePhone::sendMessage(std::string message)
 {
-    message = "Hello";
+    std::cout << "Message sent: " << message << std::endl;
 }
 
 void MobilePhone::charge()
 {
-    //
+    std::cout << "Phone is charged!" << std::endl;
 }
 
 bool MobilePhone::updateOperatingSystem(float osVersion)
 {
-    osVersion = 11.5;
+    std::cout << "Updated Operating System to Version " << osVersion << std::endl;
     return true;
 }
-
+// ============================================================
 
 struct TvScreen
 {
@@ -362,19 +370,19 @@ struct TvScreen
 
 void TvScreen::displayImage(std::string imgName)
 {
-    imgName = "funnyCat";
+    std::cout << "Displaying Image: " << imgName << std::endl;
 }
 
 void TvScreen::changeBrightness(float brightness)
 {
-    brightness = 43.2f;
+    std::cout << "Changed brightness to: " << brightness << std::endl;
 }
 
 void TvScreen::changeContrast(float contrast)
 {
-    contrast = 82.3f;
+    std::cout << "Changed contrast to: " << contrast << std::endl;
 }
-
+// ============================================================
 
 struct TvRemoteControl
 {
@@ -391,20 +399,19 @@ struct TvRemoteControl
 
 void TvRemoteControl::turnTvOn(int inputNumber, int channelNumber)
 {
-    inputNumber = 5;
-    channelNumber = 123;
+    std::cout << "TV is on. Input " << inputNumber << " / Channel " << channelNumber << std::endl;
 }
 
 void TvRemoteControl::changeChannel(int channelNumber)
 {
-    channelNumber = 2;
+    std::cout << "Changed to channel " << channelNumber << std::endl;
 }
 
 void TvRemoteControl::changeVolume(float newVolume = 3.2f)
 {
-    newVolume = 6.4f;
+    std::cout << "Changed volume to " << newVolume << std:: endl;
 }
-
+// ============================================================
 
 struct TvConnectors
 {
@@ -416,26 +423,26 @@ struct TvConnectors
 
     void outputAudio(float volume = 6.2f, int output = 2);
     bool connectToAntenna();
-    bool connectToPower(int powerSocket = 0);
+    bool connectToPower(int powerSocket = 1);
 };
 
 void TvConnectors::outputAudio(float volume, int output)
 {
-    volume = 7.2f;
-    output = 2;
+    std::cout << "Audio Output " << output << " running. Volume: " << volume << std::endl;
 }
 
 bool TvConnectors::connectToAntenna()
 {
+    std::cout << "Connected to Antenna" << std::endl;
     return true;
 }
 
-bool connectToPower(int powerSocket)
+bool TvConnectors::connectToPower(int powerSocket)
 {
-    powerSocket = 1;
+    std::cout << "Connection to power socket " << powerSocket << " failed" << std::endl;
     return false;
 }
-
+// ============================================================
 
 struct TvOnScreenMenu
 {
@@ -570,6 +577,41 @@ int main()
     macbook.runProgram("Ableton", 10);
     macbook.shutDown();
     macbook.eraseDisk("Macintosh HD");
+    macbook.logicPro.start();
+    macbook.logicPro.close();
+    macbook.logicPro.install("Macintosh HD");
+    std::cout << "============================================================" << std::endl;
 
+    Bus schoolBus;
+    schoolBus.startEngine();
+    schoolBus.turnLeft(30);
+    schoolBus.openDoors(true);
+    std::cout << "============================================================" << std::endl;
+
+    MobilePhone iPhone;
+    iPhone.sendMessage("Hey !!");
+    iPhone.charge(); 
+    iPhone.updateOperatingSystem(11.2f);
+    std::cout << "============================================================" << std::endl;
+
+    TvScreen samsungScreen;
+    samsungScreen.displayImage("Funny cat");
+    samsungScreen.changeBrightness(12.3f);
+    samsungScreen.changeContrast(22.43f);
+    std::cout << "============================================================" << std::endl;
+
+    TvRemoteControl samsungRemote;
+    samsungRemote.turnTvOn();
+    samsungRemote.changeChannel(4);
+    samsungRemote.changeVolume(11.2f);
+    std::cout << "============================================================" << std::endl;
+
+    TvConnectors samsungConnectors;
+    samsungConnectors.connectToPower();
+    samsungConnectors.connectToAntenna();
+    samsungConnectors.outputAudio(8.8f, 1);
+    std::cout << "============================================================" << std::endl;
+
+    
     std::cout << "good to go!" << std::endl;
 }
