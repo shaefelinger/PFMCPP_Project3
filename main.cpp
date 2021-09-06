@@ -171,58 +171,57 @@ struct ElectricGuitar
     int numberOfStrings = 6;
     int numberOfPickups = 2;
     std::string color = "blue";
-    int age = 12;
+    std::string name = "Telecaster";
     float price = 1299.99f;
 
     struct GuitarString
     {
         std::string manufacturer = "Ernie Ball";
-        int number = 0;
+        int number = 1;
         bool isWound = true;
         float width = 0.52f;
         std::string material = "steel";
 
         void breakString();
-        void tuneString (float pitch);
+        void tuneString (float referencePitch);
         void pluckString(int fret); 
     };
 
-    void generateNote(int string, int fretPosition);
-    void pluck(int stringNumber);
-    void tune(int stringNumber, float referencePitch); 
+    void plugIn(std::string cableColor);
+    void selectPickup(int pickup);
+    void changeVolume(float volume);
 
-    GuitarString firstString; 
+    GuitarString string1; 
 };
 
-void ElectricGuitar::generateNote(int string, int fretPosition)
+void ElectricGuitar::plugIn(std::string cableColor)
 {
-    std::cout << "You have played a Note on string " << string << " / fret " << fretPosition << std::endl;
+    std::cout << "You have plugged in the " << cableColor << " cable into the " << ElectricGuitar::color <<  " " << ElectricGuitar::name <<std::endl;
 }
 
-void ElectricGuitar::pluck(int stringNumber)
+void ElectricGuitar::selectPickup(int pickup)
 {
-    stringNumber = 0;
-    std::cout << "You plucked string " << stringNumber << std::endl;
+    std::cout << "Switched to pickup " << pickup << std::endl;
 }
 
-void ElectricGuitar::tune(int stringNumber, float referencePitch)
+void ElectricGuitar::changeVolume(float volume)
 {
-    std::cout << "String " << stringNumber << " is now tuned to " << referencePitch << " Hz!" << std::endl;
+    std::cout << "Changed Volume of " << ElectricGuitar::name <<" to " << volume << std::endl;
 }
 
 void ElectricGuitar::GuitarString::breakString()
 {
-    //
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " just broke!!" << std::endl;
 }
 
-void ElectricGuitar::GuitarString::tuneString(float pitch)
+void ElectricGuitar::GuitarString::tuneString(float referencePitch)
 {
-    pitch = 440.0f;
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " is tuned @ " << referencePitch << " Hz" <<std::endl;
 }
 
 void ElectricGuitar::GuitarString::pluckString(int fret)
 {
-    fret = 12;
+    std::cout << "Plucked String " << ElectricGuitar::GuitarString::number << " / fret " << fret << std::endl;
 }
 
 
@@ -550,10 +549,14 @@ void Tv::activateSmartTv(int menuItem)
 #include <iostream>
 int main()
 {
-    ElectricGuitar strat;
-    strat.generateNote(6, 5);
-    strat.pluck(3);
-    strat.tune(2, 414.2f);
-
+    ElectricGuitar telecaster;
+    telecaster.plugIn("green");
+    telecaster.selectPickup(1);
+    telecaster.changeVolume(9.9f);
+    telecaster.string1.breakString();
+    telecaster.string1.tuneString(442.2f);
+    telecaster.string1.pluckString(12);
+    std::cout << "==============================" << std::endl;
+    
     std::cout << "good to go!" << std::endl;
 }
