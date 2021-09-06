@@ -226,7 +226,7 @@ void ElectricGuitar::GuitarString::breakString()
 
 void ElectricGuitar::GuitarString::tuneString(float referencePitch)
 {
-    std::cout << "String " << ElectricGuitar::GuitarString::number << " is tuned @ " << referencePitch << " Hz" <<std::endl;
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " is tuned to " << referencePitch << " Hz" <<std::endl;
 }
 
 void ElectricGuitar::GuitarString::pluckString(int fret)
@@ -531,21 +531,33 @@ struct Tv
 
 void Tv::changeChannel(int channelNumber, bool useRemoteControl)
 {
+    std::cout << "You have switched to Channel " << channelNumber;
     if (useRemoteControl)
     {
-        channelNumber++;
+        std::cout << " with the remote control." << std::endl;
+    }
+    else
+    {
+        std::cout << "." << std::endl;
     }
 }
 
 void Tv::changeVolume(float newVolume, bool useRemoteControl)
 {
-    newVolume = 3.3f;
-    useRemoteControl = false;
+    std::cout << "Volume changed to " << newVolume;
+    if (useRemoteControl)
+    {
+        std::cout << " with the remote control." << std::endl;
+    }
+    else
+    {
+        std::cout << "." << std::endl;
+    }
 }
 
 void Tv::activateSmartTv(int menuItem)
 {
-    menuItem++;
+    std::cout << "SmartTV-Menu Item " << menuItem << " activated!" << std::endl;
 }
 
 /*
@@ -567,6 +579,7 @@ int main()
 {
     Person runner;
     runner.run(false);
+    runner.run(true);
     std::cout << "============================================================" << std::endl;
 
     ElectricGuitar telecaster;
@@ -590,6 +603,7 @@ int main()
     Bus schoolBus;
     schoolBus.startEngine();
     schoolBus.turnLeft(30);
+    schoolBus.openDoors(false);
     schoolBus.openDoors(true);
     std::cout << "============================================================" << std::endl;
 
@@ -625,11 +639,16 @@ int main()
 
     TvManufacturer sony;
     sony.goBankrupt(true);
+    sony.goBankrupt(false);
     sony.releasNewModel("TV2000x", 1299.99f);
     sony.buyRivalCompany("LG", 1.99f);
     std::cout << "============================================================" << std::endl;
 
-
+    Tv samsungTv;
+    samsungTv.changeChannel(11, true);
+    samsungTv.changeChannel(12, false);
+    samsungTv.changeVolume(12.2f, true);
+    samsungTv.activateSmartTv(3);
 
     std::cout << "good to go!" << std::endl;
 }
