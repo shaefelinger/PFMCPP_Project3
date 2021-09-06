@@ -180,7 +180,7 @@ struct ElectricGuitar
     {
         std::string manufacturer = "Ernie Ball";
         int number = 1;
-        bool isWound = false;
+        bool isWound = true;
         float width = 0.52f;
         std::string material = "steel";
 
@@ -511,11 +511,10 @@ bool TvManufacturer::releasNewModel(std::string modelName, float price)
 
 bool TvManufacturer::buyRivalCompany(std:: string company, float price)
 {
-    company = "Samsung";
-    price = 1.99f;
-    return false;
+    std::cout << TvManufacturer::name << " has just bought " << company << " for $" << price  << std::endl;
+    return true;
 }
-
+// ============================================================
 
 struct Tv
 {
@@ -625,10 +624,12 @@ int main()
     std::cout << "============================================================" << std::endl;
 
     TvManufacturer sony;
-    
     sony.goBankrupt(true);
     sony.releasNewModel("TV2000x", 1299.99f);
-    sony.buyRivalCompany("LG", 122324.98f);
+    sony.buyRivalCompany("LG", 1.99f);
+    std::cout << "============================================================" << std::endl;
+
+
 
     std::cout << "good to go!" << std::endl;
 }
