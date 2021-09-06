@@ -108,9 +108,50 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+  
+    void run(bool startWithLeftFoot);
 
+    struct Foot
+    {
+        int stepSize()
+        {
+            return 2;
+        }
 
+        void stepForward()
+        {
+            //
+        }
+    };
 
+    Foot leftFoot;
+    Foot rightFoot;
+};
+
+void Person::run(bool startWithLeftFoot)
+{
+    if(startWithLeftFoot == true)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+        std::cout << "started running with the left foot" << std::endl;
+    } 
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+        std::cout << "started running with the right foot" << std::endl;
+    }
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();      
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -126,81 +167,80 @@ struct CarWash
  */
 
 
-
-/*
-Thing 1) electric Guitar
-5 properties:
-    1) number of strings (int)
-    2) number of pickups (int)
-    3) color (std::string)
-    4) age (int)
-    5) price (float)
-3 things it can do:
-    1) generate a Note
-    2) break a String
-    3) tune
- */
-
+// ============================================================
 struct ElectricGuitar
 {
-    // number of strings (int)
     int numberOfStrings = 6;
-    // number of pickups (int)
     int numberOfPickups = 2;
-    // color (std::string)
     std::string color = "blue";
-    // age (int)
-    int age = 12;
-    // price (float)
+    std::string name = "Telecaster";
     float price = 1299.99f;
 
     struct GuitarString
     {
         std::string manufacturer = "Ernie Ball";
-        int number = 0;
+        int number = 1;
         bool isWound = true;
         float width = 0.52f;
         std::string material = "steel";
 
         void breakString();
-        void tune (float pitch);
-        void pluck(int fret); 
+        void tuneString (float referencePitch);
+        void pluckString(int fret); 
     };
 
-    // generate a Note
-    void generateNote(GuitarString string, int fretPosition);
-    // break a String
-    void breakString(GuitarString stringNumber);
-    // tune
-    void tune(GuitarString stringNumber, float referencePitch); 
+    void plugIn(std::string cableColor);
+    void selectPickup(int pickup);
+    void changeVolume(float volume);
 
-    GuitarString string; 
+    GuitarString string1; 
 };
 
-/*
-Thing 2) computer
-5 properties:
-    1) amount of ram (int)
-    2) processor-speed (float)
-    3) size of disk (int)
-    4) manufacturer (std::string)
-    5) operating system (std::string)
-3 things it can do:
-    1) run program
-    2) shut down
-    3) erase disk
- */
+void ElectricGuitar::plugIn(std::string cableColor)
+{
+    std::cout << "You have plugged in the " << cableColor << " cable into the " << ElectricGuitar::color <<  " " << ElectricGuitar::name <<std::endl;
+}
+
+void ElectricGuitar::selectPickup(int pickup)
+{
+    std::cout << "Switched to pickup " << pickup << std::endl;
+}
+
+void ElectricGuitar::changeVolume(float volume)
+{
+    std::cout << "Changed Volume of " << ElectricGuitar::name <<" to " << volume << std::endl;
+}
+
+void ElectricGuitar::GuitarString::breakString()
+{
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " just broke!! ";
+    if (ElectricGuitar::GuitarString::isWound)
+    {
+        std::cout << "This is a wound string - how did that happen??" << std::endl;;
+    }
+    else  
+    {
+        std::cout << std::endl;
+    }
+}
+
+void ElectricGuitar::GuitarString::tuneString(float referencePitch)
+{
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " is tuned to " << referencePitch << " Hz" <<std::endl;
+}
+
+void ElectricGuitar::GuitarString::pluckString(int fret)
+{
+    std::cout << "Plucked String " << ElectricGuitar::GuitarString::number << " / fret " << fret << std::endl;
+}
+
+// ============================================================
 struct Computer
 {
-    // amount of ram (int) in gigabyte
     int amountOfRam = 64;
-    // processor-speed (float)in GHz
     float processorSpeed = 2.4f;
-    // size of disk (int) in terrabyte
     int sizeOfDisk = 4;
-    // manufacturer (std::string)
     std::string manufacturer = "Apple";
-    // operating system (std::string)
     std::string operatingSystem = "MacOS";
 
     struct Application
@@ -216,292 +256,309 @@ struct Computer
         void install(std::string filePath);
     };
 
-    // run program
-    void runProgram(Application program, int priority);
-    // shut down
+    void runProgram(std::string program, int priority);
     void shutDown();
-    // erase disk
     void eraseDisk(std::string volumeName);
 
-    Application application;
+    Application logicPro;
 };
 
-/*
-Thing 3) bus
-5 properties:
-    1) maximum speed (int)
-    2) number of seats (int)
-    3) manufacturer (std::string)
-    4) fuel consumption (float)
-    5) color (std::string)
-3 things it can do:
-    1) start engine
-    2) turn left
-    3) open doors
- */
+void Computer::runProgram(std::string program, int priority)
+{
+    std::cout << "Running " << program << " with priority " << priority << std::endl;
+}
+
+void Computer::shutDown()
+{
+    std::cout << "Computer shut down!" << std::endl;
+}
+
+void Computer::eraseDisk(std::string volumeName)
+{
+    std::cout << "Erased Disk " << volumeName << std::endl;
+}
+
+void Computer::Application::start()
+{
+    std::cout << Computer::Application::name << " started" << std::endl;
+}
+
+void Computer::Application::close()
+{
+    std::cout << Computer::Application::name << " closed" << std::endl;
+}
+
+void Computer::Application::install(std::string filePath)
+{
+    std::cout << Computer::Application::name << " installed on " << filePath << std::endl;
+}
+// ============================================================
+
 struct Bus
 {
-    // maximum speed (int)
     int maximumSpeed = 100;
-    // number of seats (int)
     int numberOfSeets = 18;
-    // manufacturer (std::string)
     std::string manufacturer = "MAN";
-    // fuel consumption (float)
     float fuelConsumption = 20.3f;
-    // color (std::string)
 
-    // start engine
     void startEngine();
-    // turn left
     void turnLeft(int angle);
-    // open doors
     void openDoors(bool openAllDoors);
 };
 
-/*
-Thing 4) mobile phone
-5 properties:
-    1) size of memory (int)
-    2) size of screen (int)
-    3) manufacturer (std::string)
-    4) type of camera (std::string)
-    5) year of manufacture (int)
-3 things it can do:
-    1) send message
-    2) charge
-    3) update operating system
- */
+void Bus::startEngine()
+{
+    std::cout << "Engine of Bus started" << std::endl;
+}
+
+void Bus::turnLeft(int angle)
+{
+    std::cout << "Turned left " << angle << " degrees" << std::endl;
+}
+
+void Bus::openDoors(bool openAllDoors)
+{
+    if(openAllDoors)
+    {
+        std::cout << "Opened all doors" << std::endl;
+    }
+    else 
+    {
+        std::cout << "Opened a single door" << std::endl;
+    }
+}
+// ============================================================
 
 struct MobilePhone
 {
-    // size of memory (int)
     int sizeOfMemory = 2;
-    // size of screen (int)
     int sizeOfScreen = 2;
-    // manufacturer (std::string)
     std::string manufacturer = "Nokia";
-    // type of camera (std::string)
     std::string typeOfCamera = "none";
-    // year of manufacture (int)
     int yearOfManufacture = 1995;
 
-    // send message
     void sendMessage(std::string message);
-    // charge
     void charge(); 
-    // update operating system
     bool updateOperatingSystem(float osVersion);
 };
 
-/*
-Thing 5) screen
-5 properties:
-    1) width (float)
-    2) height (height)
-    3) number of pixels (int)
-    4) type (std::string)
-    5) refresh rate (int)
-3 things it can do:
-    1) display image
-    2) change brightness
-    3) change contrast
- */
+void MobilePhone::sendMessage(std::string message)
+{
+    std::cout << "Message sent: " << message << std::endl;
+}
+
+void MobilePhone::charge()
+{
+    std::cout << "Phone is charged!" << std::endl;
+}
+
+bool MobilePhone::updateOperatingSystem(float osVersion)
+{
+    std::cout << "Updated Operating System to Version " << osVersion << std::endl;
+    return true;
+}
+// ============================================================
 
 struct TvScreen
 {
-    // width (float)
     float width = 62.3f;
-    // height (float)
     float height = 33.4f;
-    // number of pixels (int)
     int numberOfPixels = 921600;
-    // type (std::string)
     std::string type = "LED";
-    // refresh rate (int)
     int refreshRate = 60;
 
-    // display image
     void displayImage(std::string imgName = "defaultImage");
-    // change brightness
     void changeBrightness(float brightness);
-    // change contrast
     void changeContrast(float contrast);
 }; 
 
-/*
-Thing 6) remote control
-5 properties:
-    1) number of knobs (int)
-    2) color (std::string)
-    3) type (std::string)
-    4) size (float)
-    5) range (float)
-3 things it can do:
-    1) turn tv on
-    2) change channel
-    3) change volume
- */
+void TvScreen::displayImage(std::string imgName)
+{
+    std::cout << "Displaying Image: " << imgName << std::endl;
+}
+
+void TvScreen::changeBrightness(float brightness)
+{
+    std::cout << "Changed brightness to: " << brightness << std::endl;
+}
+
+void TvScreen::changeContrast(float contrast)
+{
+    std::cout << "Changed contrast to: " << contrast << std::endl;
+}
+// ============================================================
 
 struct TvRemoteControl
 {
-    // number of knobs (int)
     int numberOfKnobs = 22;
-    // color (std::string)
     std::string color = "black";
-    // type (std::string)
     std::string type = "infrared";
-    // size (float)
     float size = 10.2f;
-    // range (float)
     float range = 20.4f;
 
-    // turn tv on
     void turnTvOn(int inputNumber = 0, int channelNumber = 1);
-    // change channel
     void changeChannel(int channelNumber = 1);
-    // change volume
-    void changeVolume(float newVolume = 3.2f);
+    void changeVolume(float newVolume);
 };
-/*
-Thing 7) connectors
-5 properties:
-    1) number of hdmi-inputs (int)
-    2) number of heatphone-putputs (int)
-    3) type of digital-out (std::string)
-    4) hasScartConnector (bool)
-    5) type of power connector (std::string)
-3 things it can do:
-    1) output audio
-    2) connect to antenna
-    3) connect to power
- */
+
+void TvRemoteControl::turnTvOn(int inputNumber, int channelNumber)
+{
+    std::cout << "TV is on. Input " << inputNumber << " / Channel " << channelNumber << std::endl;
+}
+
+void TvRemoteControl::changeChannel(int channelNumber)
+{
+    std::cout << "Changed to channel " << channelNumber << std::endl;
+}
+
+void TvRemoteControl::changeVolume(float newVolume = 3.2f)
+{
+    std::cout << "Changed volume to " << newVolume << std:: endl;
+}
+// ============================================================
 
 struct TvConnectors
 {
-    // number of hdmi-inputs (int)
     int numberHdmiInputs = 2;
-    // number of heatphone-putputs (int)
     int numberHeadphoneOuts = 3;
-    // type of digital-out (std::string)
     std::string digitalOutType = "spdif";
-    // hasScartConnector (bool)
     bool hasScartConnector = false;
-    // type of power connector (std::string)
     std::string powerConnectorType = "external";
 
-    // output audio
     void outputAudio(float volume = 6.2f, int output = 2);
-    // connect to antenna
     bool connectToAntenna();
-    // connect to power
-    bool connectToPower(int powerSocket = 0);
+    bool connectToPower(int powerSocket = 1);
 };
 
-/*
-Thing 8) on screen menu
-5 properties:
-    1) size (float)
-    2) number of menu-elements (int)
-    3) color (std::string)
-    4) number of languages (int)
-    5) default language (std::string)
-3 things it can do:
-    1) show Netflix 
-    2) show TV-Guide
-    3) activate recording
- */
+void TvConnectors::outputAudio(float volume, int output)
+{
+    std::cout << "Audio Output " << output << " running. Volume: " << volume << std::endl;
+}
+
+bool TvConnectors::connectToAntenna()
+{
+    std::cout << "Connected to Antenna" << std::endl;
+    return true;
+}
+
+bool TvConnectors::connectToPower(int powerSocket)
+{
+    std::cout << "Connection to power socket " << powerSocket << " failed" << std::endl;
+    return false;
+}
+// ============================================================
 
 struct TvOnScreenMenu
 {
-    // size (float)
     float size = 10.4f;
-    // number of menu-elements (int)
     int menuElements = 12;
-    // color (std::string)
     std::string color = "gray";
-    // number of languages (int)
     int numberOfLanguages = 9;
-    // default language (std::string)
     std::string language = "english";
 
-    // show Netflix 
     void showNetflix(std::string showTitle, int season, int episode);
-    // show TV-Guide
     void showTVGuide(int week);
-    // activate recording
     void activateRecoding(int channel);
 };
 
-/*
-Thing 9)
-5 properties: manufacturer
-    1) name (float)
-    2) headquarters location (std::string)
-    3) founding year (int)
-    4) name of founder (std::string)
-    5) annual profit (float)
-3 things it can do:
-    1) go bankrupt
-    2) release new model
-    3) buy rival company
- */ 
+void TvOnScreenMenu::showNetflix(std::string showTitle, int season, int episode)
+{
+    std::cout << "Showing " << showTitle << " - Season " << season << " - Episode " << episode << std::endl;
+}
+
+void TvOnScreenMenu::showTVGuide(int week)
+{
+    std::cout << "Displaying TV-Guide for week " << week << std::endl;
+}
+
+void TvOnScreenMenu::activateRecoding(int channel)
+{
+    std::cout << "Recoding Channel " << channel << std::endl;
+}
+// ============================================================
 
 struct TvManufacturer
 {
-    // name (float)
     std::string name = "SONY";
-    // headquarters location (std::string)
     std::string headquartersLocation = "Japan";
-    // founding year (int)
     int foundingYear = 1946;
-    // name of founder (std::string)
     std::string founder = "Masaru Ibuka";
-    // annual profit (float)
     float annualProfit = 1178.8f;
 
-    // go bankrupt
     void goBankrupt(bool payAllDebts);
-    // release new model
     bool releasNewModel(std::string modelName, float price);
-    // buy rival company
     bool buyRivalCompany(std:: string company, float price);
 };
 
-/*
-Thing 10) tv
-5 properties:
-    1) screen 
-    2) remote control
-    3) connectors
-    4) on screen menu
-    5) manufacturer
-3 things it can do:
-    1) change channel
-    2) change volume
-    3) activate smart tv
- */
+void TvManufacturer::goBankrupt(bool payAllDebts)
+{
+    std::cout << "Sorry - we're bankrup!! " ;
+    if (payAllDebts)
+    {
+        std::cout << "But we will pay our debts!" << std::endl;
+    } 
+    else
+    {
+        std::cout << "And we will not pay our debts!" << std::endl;
+    }
+}
+
+bool TvManufacturer::releasNewModel(std::string modelName, float price)
+{
+    std::cout << "We have just released the new " << modelName << " for only " << price << std::endl;
+    return true;
+}
+
+bool TvManufacturer::buyRivalCompany(std:: string company, float price)
+{
+    std::cout << TvManufacturer::name << " has just bought " << company << " for $" << price  << std::endl;
+    return true;
+}
+// ============================================================
 
 struct Tv
 {
-    // screen 
     TvScreen screen;
-    // remote control
     TvRemoteControl remoteControl;
-    // connectors
     TvConnectors connectors;
-    // on screen menu
     TvOnScreenMenu onScreenMenu;
-    // manufacturer
     TvManufacturer manufacturer;
 
-    // change channel
     void changeChannel(int channelNumber, bool useRemoteControl);
-    // change volume
     void changeVolume(float newVolume, bool useRemoteControl);
-    // activate smart tv
     void activateSmartTv(int menuItem = 0);
 };
+
+void Tv::changeChannel(int channelNumber, bool useRemoteControl)
+{
+    std::cout << "You have switched to Channel " << channelNumber;
+    if (useRemoteControl)
+    {
+        std::cout << " with the remote control." << std::endl;
+    }
+    else
+    {
+        std::cout << "." << std::endl;
+    }
+}
+
+void Tv::changeVolume(float newVolume, bool useRemoteControl)
+{
+    std::cout << "Volume changed to " << newVolume;
+    if (useRemoteControl)
+    {
+        std::cout << " with the remote control." << std::endl;
+    }
+    else
+    {
+        std::cout << "." << std::endl;
+    }
+}
+
+void Tv::activateSmartTv(int menuItem)
+{
+    std::cout << "SmartTV-Menu Item " << menuItem << " activated!" << std::endl;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -520,5 +577,78 @@ struct Tv
 #include <iostream>
 int main()
 {
+    Person runner;
+    runner.run(false);
+    runner.run(true);
+    std::cout << "============================================================" << std::endl;
+
+    ElectricGuitar telecaster;
+    telecaster.plugIn("green");
+    telecaster.selectPickup(1);
+    telecaster.changeVolume(9.9f);
+    telecaster.string1.breakString();
+    telecaster.string1.tuneString(442.2f);
+    telecaster.string1.pluckString(12);
+    std::cout << "============================================================" << std::endl;
+
+    Computer macbook;
+    macbook.runProgram("Ableton", 10);
+    macbook.shutDown();
+    macbook.eraseDisk("Macintosh HD");
+    macbook.logicPro.start();
+    macbook.logicPro.close();
+    macbook.logicPro.install("Macintosh HD");
+    std::cout << "============================================================" << std::endl;
+
+    Bus schoolBus;
+    schoolBus.startEngine();
+    schoolBus.turnLeft(30);
+    schoolBus.openDoors(false);
+    schoolBus.openDoors(true);
+    std::cout << "============================================================" << std::endl;
+
+    MobilePhone iPhone;
+    iPhone.sendMessage("Hey !!");
+    iPhone.charge(); 
+    iPhone.updateOperatingSystem(11.2f);
+    std::cout << "============================================================" << std::endl;
+
+    TvScreen samsungScreen;
+    samsungScreen.displayImage("Funny cat");
+    samsungScreen.changeBrightness(12.3f);
+    samsungScreen.changeContrast(22.43f);
+    std::cout << "============================================================" << std::endl;
+
+    TvRemoteControl samsungRemote;
+    samsungRemote.turnTvOn();
+    samsungRemote.changeChannel(4);
+    samsungRemote.changeVolume(11.2f);
+    std::cout << "============================================================" << std::endl;
+
+    TvConnectors samsungConnectors;
+    samsungConnectors.connectToPower();
+    samsungConnectors.connectToAntenna();
+    samsungConnectors.outputAudio(8.8f, 1);
+    std::cout << "============================================================" << std::endl;
+
+    TvOnScreenMenu samsungMenu;
+    samsungMenu.showNetflix("Breaking Bad", 3, 4);
+    samsungMenu.showTVGuide(22);
+    samsungMenu.activateRecoding(12); 
+    std::cout << "============================================================" << std::endl;
+
+    TvManufacturer sony;
+    sony.goBankrupt(true);
+    sony.goBankrupt(false);
+    sony.releasNewModel("TV2000x", 1299.99f);
+    sony.buyRivalCompany("LG", 1.99f);
+    std::cout << "============================================================" << std::endl;
+
+    Tv samsungTv;
+    samsungTv.changeChannel(11, true);
+    samsungTv.changeChannel(12, false);
+    samsungTv.changeVolume(12.2f, true);
+    samsungTv.activateSmartTv(3);
+
     std::cout << "good to go!" << std::endl;
 }
