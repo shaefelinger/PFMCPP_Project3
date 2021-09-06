@@ -180,7 +180,7 @@ struct ElectricGuitar
     {
         std::string manufacturer = "Ernie Ball";
         int number = 1;
-        bool isWound = true;
+        bool isWound = false;
         float width = 0.52f;
         std::string material = "steel";
 
@@ -213,10 +213,14 @@ void ElectricGuitar::changeVolume(float volume)
 
 void ElectricGuitar::GuitarString::breakString()
 {
-    std::cout << "String " << ElectricGuitar::GuitarString::number << " just broke!!" << std::endl;
+    std::cout << "String " << ElectricGuitar::GuitarString::number << " just broke!! ";
     if (ElectricGuitar::GuitarString::isWound)
     {
         std::cout << "This is a wound string - how did that happen??" << std::endl;;
+    }
+    else  
+    {
+        std::cout << std::endl;
     }
 }
 
@@ -459,21 +463,19 @@ struct TvOnScreenMenu
 
 void TvOnScreenMenu::showNetflix(std::string showTitle, int season, int episode)
 {
-    showTitle = "Breaking Bad";
-    season = 2;
-    episode = 5;
+    std::cout << "Showing " << showTitle << " - Season " << season << " - Episode " << episode << std::endl;
 }
 
 void TvOnScreenMenu::showTVGuide(int week)
 {
-    week = 22;
+    std::cout << "Displaying TV-Guide for week " << week << std::endl;
 }
 
 void TvOnScreenMenu::activateRecoding(int channel)
 {
-    channel += 1;
+    std::cout << "Recoding Channel " << channel << std::endl;
 }
-
+// ============================================================
 
 struct TvManufacturer
 {
@@ -490,20 +492,24 @@ struct TvManufacturer
 
 void TvManufacturer::goBankrupt(bool payAllDebts)
 {
+    std::cout << "Sorry - we're bankrup!! " ;
     if (payAllDebts)
     {
-        payAllDebts = false;
-    } // they will never pay the debts ;-)
+        std::cout << "But we will pay our debts!" << std::endl;
+    } 
+    else
+    {
+        std::cout << "And we will not pay our debts!" << std::endl;
+    }
 }
 
 bool TvManufacturer::releasNewModel(std::string modelName, float price)
 {
-    modelName = "XYZ123";
-    price += 200;
+    std::cout << "We have just released the new " << modelName << " for only " << price << std::endl;
     return true;
 }
 
-bool buyRivalCompany(std:: string company, float price)
+bool TvManufacturer::buyRivalCompany(std:: string company, float price)
 {
     company = "Samsung";
     price = 1.99f;
@@ -612,6 +618,17 @@ int main()
     samsungConnectors.outputAudio(8.8f, 1);
     std::cout << "============================================================" << std::endl;
 
+    TvOnScreenMenu samsungMenu;
+    samsungMenu.showNetflix("Breaking Bad", 3, 4);
+    samsungMenu.showTVGuide(22);
+    samsungMenu.activateRecoding(12); 
+    std::cout << "============================================================" << std::endl;
+
+    TvManufacturer sony;
     
+    sony.goBankrupt(true);
+    sony.releasNewModel("TV2000x", 1299.99f);
+    sony.buyRivalCompany("LG", 122324.98f);
+
     std::cout << "good to go!" << std::endl;
 }
