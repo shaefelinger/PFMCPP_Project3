@@ -111,42 +111,44 @@ struct CarWash
 struct Person
 {
     int age;
-	int height;
-	float hairLength;
-	float GPA;
-	unsigned int SATScore;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
     int distanceTraveled;
   
     void run(bool startWithLeftFoot);
-};
 
-struct Foot
-{
-    int stepSize()
+    struct Foot
     {
-        //
-        return 2;
-    }
+        int stepSize()
+        {
+            return 2;
+        }
 
-    void stepForward()
-    {
-        //
-    }
+        void stepForward()
+        {
+            //
+        }
+    };
+
+    Foot leftFoot;
+    Foot rightFoot;
 };
 
 void Person::run(bool startWithLeftFoot)
 {
-    Foot leftFoot;
-    Foot rightFoot;
     if(startWithLeftFoot == true)
     {
         leftFoot.stepForward();
         rightFoot.stepForward();
+        std::cout << "started running with the left foot" << std::endl;
     } 
     else
     {
         rightFoot.stepForward();
         leftFoot.stepForward();
+        std::cout << "started running with the right foot" << std::endl;
     }
     distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();      
 }
@@ -194,19 +196,18 @@ struct ElectricGuitar
 
 void ElectricGuitar::generateNote(int string, int fretPosition)
 {
-    string = 2; // to avoid 'unused parameter'
-    fretPosition = 4;
+    std::cout << "You have played a Note on string " << string << " / fret " << fretPosition << std::endl;
 }
 
 void ElectricGuitar::pluck(int stringNumber)
 {
     stringNumber = 0;
+    std::cout << "You plucked string " << stringNumber << std::endl;
 }
 
 void ElectricGuitar::tune(int stringNumber, float referencePitch)
 {
-    stringNumber = 2;
-    referencePitch= 440.0f;
+    std::cout << "String " << stringNumber << " is now tuned to " << referencePitch << " Hz!" << std::endl;
 }
 
 void ElectricGuitar::GuitarString::breakString()
@@ -549,5 +550,10 @@ void Tv::activateSmartTv(int menuItem)
 #include <iostream>
 int main()
 {
+    ElectricGuitar strat;
+    strat.generateNote(6, 5);
+    strat.pluck(3);
+    strat.tune(2, 414.2f);
+
     std::cout << "good to go!" << std::endl;
 }
