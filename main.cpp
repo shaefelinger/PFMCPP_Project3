@@ -38,17 +38,19 @@ int main()
 
 //call Example::main()
 
-
-
 // ============================================================
 struct ElectricGuitar
 {
-    ElectricGuitar();
     int numberOfStrings = 6;
     int numberOfPickups = 2;
     std::string color = "blue";
-    std::string name = "Telecaster";
-    float price = 1299.99f;
+    std::string name;
+    float price;
+
+    ElectricGuitar() : name("Telecaster"), price(1899.99f) 
+    { 
+        std::cout << "CONSTRUCTING ElectricGuitar" << std::endl;
+    }
 
     struct GuitarString
     {
@@ -69,11 +71,6 @@ struct ElectricGuitar
 
     GuitarString string1; 
 };
-
-ElectricGuitar::ElectricGuitar()
-{
-    std::cout << "CONSTRUCTING ElectricGuitar" << std::endl;
-}
 
 void ElectricGuitar::plugIn(std::string cableColor)
 {
@@ -117,8 +114,8 @@ void ElectricGuitar::GuitarString::pluckString(int fret)
 struct Computer
 {
     Computer();
-    int amountOfRam = 64;
-    float processorSpeed = 2.4f;
+    int amountOfRam;
+    float processorSpeed {2.4f};
     int sizeOfDisk = 4;
     std::string manufacturer = "Apple";
     std::string operatingSystem = "MacOS";
@@ -140,10 +137,15 @@ struct Computer
     void shutDown();
     void eraseDisk(std::string volumeName);
 
+    void showInfo()
+    {
+        std::cout << "The Computer has " << amountOfRam << "GB of RAM and a processor speed of " << processorSpeed << " GHz" << std::endl;
+    }
+
     Application logicPro;
 };
 
-Computer::Computer()
+Computer::Computer() : amountOfRam(8)
 {
     std::cout << "CONSTRUCTING Computer" << std::endl;
 }
@@ -181,9 +183,13 @@ void Computer::Application::install(std::string filePath)
 
 struct Bus
 {
-    Bus();
-    int maximumSpeed = 100;
-    int numberOfSeats = 18;
+    Bus() : numberOfSeats(24) 
+    {
+        std::cout << "CONSTRUCTING Bus" << std::endl;
+    }
+
+    int maximumSpeed { 110 };
+    int numberOfSeats;
     std::string manufacturer = "MAN";
     float fuelConsumption = 20.3f;
 
@@ -192,14 +198,9 @@ struct Bus
     void openDoors(bool openAllDoors);
 };
 
-Bus::Bus()
-{
-    std::cout << "CONSTRUCTING Bus" << std::endl;
-}
-
 void Bus::startEngine()
 {
-    std::cout << "Engine of Bus started" << std::endl;
+    std::cout << "Engine of Bus started. The maximum speed is " << maximumSpeed << " km/h" <<std::endl;
 }
 
 void Bus::turnLeft(int angle)
@@ -225,7 +226,7 @@ struct MobilePhone
     MobilePhone();
     int sizeOfMemory = 2;
     int sizeOfScreen = 2;
-    std::string manufacturer = "Nokia";
+    std::string manufacturer;
     std::string typeOfCamera = "none";
     int yearOfManufacture = 1995;
 
@@ -234,7 +235,7 @@ struct MobilePhone
     bool updateOperatingSystem(float osVersion);
 };
 
-MobilePhone::MobilePhone()
+MobilePhone::MobilePhone() : manufacturer("Nokia"), yearOfManufacture(1995)
 {
     std::cout << "CONSTRUCTING MobilePhone" << std::endl;
 }
@@ -251,29 +252,30 @@ void MobilePhone::charge()
 
 bool MobilePhone::updateOperatingSystem(float osVersion)
 {
-    std::cout << "Updated Operating System to Version " << osVersion << std::endl;
+    std::cout << "Updated Operating System to Version " << osVersion << " on this " << manufacturer << "-phone from " << yearOfManufacture << std::endl;
     return true;
 }
 // ============================================================
 
 struct TvScreen
 {
-    TvScreen();
+    TvScreen() 
+    {
+        std::cout << "CONSTRUCTING TvScreen" << std::endl;
+    }
+
     float width = 62.3f;
     float height = 33.4f;
     int numberOfPixels = 921600;
-    std::string type = "LED";
-    int refreshRate = 60;
+    std::string type { "LED" };
+    int refreshRate { 60 };
 
     std::string displayImage(std::string imgName = "defaultImage");
     void changeBrightness(float brightness);
     void changeContrast(float contrast);
-}; 
 
-TvScreen::TvScreen()
-{
-    std::cout << "CONSTRUCTING TvScreen" << std::endl;
-}
+    std::string getInfo();
+}; 
 
 std::string TvScreen::displayImage(std::string imgName)
 {
@@ -290,14 +292,19 @@ void TvScreen::changeContrast(float contrast)
 {
     std::cout << "Changed contrast to: " << contrast << std::endl;
 }
+
+std::string TvScreen::getInfo()
+{
+    return "This is a " + type + " screen with a refresh rate of " + std::to_string(refreshRate) + " Hz"; 
+}
 // ============================================================
 
 struct TvRemoteControl
 {
     TvRemoteControl();
     int numberOfKnobs = 22;
-    std::string color = "black";
-    std::string type = "infrared";
+    std::string color  { "black" };
+    std::string type { "infrared" };
     float size = 10.2f;
     float range = 20.4f;
 
@@ -318,7 +325,7 @@ void TvRemoteControl::turnTvOn(int inputNumber, int channelNumber)
 
 void TvRemoteControl::changeChannel(int channelNumber)
 {
-    std::cout << "Changed to channel " << channelNumber << std::endl;
+    std::cout << "Changed to channel " << channelNumber << " with the " << type << " remote control" << std::endl;
 }
 
 void TvRemoteControl::changeVolume(float newVolume = 3.2f)
@@ -330,9 +337,9 @@ void TvRemoteControl::changeVolume(float newVolume = 3.2f)
 struct TvConnectors
 {
     TvConnectors();
-    int numberHdmiInputs = 2;
+    int numberHdmiInputs;
     int numberHeadphoneOuts = 3;
-    std::string digitalOutType = "spdif";
+    std::string digitalOutType;
     bool hasScartConnector = false;
     std::string powerConnectorType = "external";
 
@@ -341,7 +348,7 @@ struct TvConnectors
     bool connectToPower(int powerSocket = 1);
 };
 
-TvConnectors::TvConnectors()
+TvConnectors::TvConnectors() : numberHdmiInputs(3), digitalOutType("spdif") 
 {
     std::cout << "CONSTRUCTING TvConnectors" << std::endl;
 }
@@ -349,6 +356,7 @@ TvConnectors::TvConnectors()
 void TvConnectors::outputAudio(float volume, int output)
 {
     std::cout << "Audio Output " << output << " running. Volume: " << volume << std::endl;
+    std::cout << "The " << digitalOutType << " digital output is also working" << std::endl;
 }
 
 bool TvConnectors::connectToAntenna()
@@ -369,13 +377,15 @@ struct TvOnScreenMenu
     TvOnScreenMenu();
     float size = 10.4f;
     int menuElements = 12;
-    std::string color = "gray";
+    std::string color { "gray" };
     int numberOfLanguages = 9;
-    std::string language = "english";
+    std::string language { "english" };
 
     void showNetflix(std::string showTitle, int season, int episode);
     void showTVGuide(int week);
     void activateRecoding(int channel);
+
+    void getLanguage();
 };
 
 TvOnScreenMenu::TvOnScreenMenu()
@@ -397,12 +407,18 @@ void TvOnScreenMenu::activateRecoding(int channel)
 {
     std::cout << "Recoding Channel " << channel << std::endl;
 }
+
+void TvOnScreenMenu::getLanguage()
+{
+    std::cout << "The onscreen-menu is displayed in " << language << ", but you can choose any of the " << numberOfLanguages <<" languages" << std::endl;
+}
+
 // ============================================================
 
 struct TvManufacturer
 {
     TvManufacturer();
-    std::string name = "SONY";
+    std::string name;
     std::string headquartersLocation = "Japan";
     int foundingYear = 1946;
     std::string founder = "Masaru Ibuka";
@@ -413,7 +429,7 @@ struct TvManufacturer
     bool buyRivalCompany(std:: string company, float price);
 };
 
-TvManufacturer::TvManufacturer()
+TvManufacturer::TvManufacturer() : name("SONY"), headquartersLocation("Japan")
 {
     std::cout << "CONSTRUCTING TvManufacturer" << std::endl;
 }
@@ -535,7 +551,8 @@ int main()
     macbook.logicPro.start();
     macbook.logicPro.close();
     macbook.logicPro.install("Macintosh HD");
-    std::cout << "The Computer has " << macbook.amountOfRam << "GB of RAM and a processor speed of " << macbook.processorSpeed << " GHz" << std::endl;
+    macbook.showInfo();
+    
     std::cout << macbook.logicPro.name << " by " << macbook.logicPro.manufacturer << " has a size of " << macbook.logicPro.size << " GB" << std::endl;
     std::cout << "============================================================" << std::endl;
 
@@ -568,7 +585,7 @@ int main()
     std::cout << samsungScreen.displayImage("Funny cat") << std::endl;
     samsungScreen.changeBrightness(12.3f);
     samsungScreen.changeContrast(22.43f);
-    std::cout << "This is a " << samsungScreen.type << " screen with a refresh rate of " << samsungScreen.refreshRate << " Hz" << std::endl;
+    std::cout << samsungScreen.getInfo() << std::endl;
     std::cout << "============================================================" << std::endl;
 
     TvRemoteControl samsungRemote;
@@ -589,7 +606,7 @@ int main()
     samsungMenu.showNetflix("Breaking Bad", 3, 4);
     samsungMenu.showTVGuide(22);
     samsungMenu.activateRecoding(12); 
-    std::cout << "The onscreen-menu is displayed in " << samsungMenu.language << ", but you can choose any of the " << samsungMenu.numberOfLanguages <<" languages" << std::endl;
+    samsungMenu.getLanguage();
     std::cout << "============================================================" << std::endl;
 
     TvManufacturer sony;
