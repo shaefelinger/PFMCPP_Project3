@@ -484,6 +484,9 @@ int main()
 {
     Example::main();
     
+    Person runner;
+    runner.run(false);
+    runner.run(true);
     std::cout << "============================================================" << std::endl;
 
     ElectricGuitar telecaster;
