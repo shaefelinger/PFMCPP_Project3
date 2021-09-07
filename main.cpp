@@ -69,9 +69,6 @@ int main()
 //insert Example::main() into main() of user's repo.
 
 
-
-
-
 // ============================================================
 struct ElectricGuitar
 {
