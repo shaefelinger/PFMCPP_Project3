@@ -109,7 +109,7 @@ ElectricGuitar::ElectricGuitar()
 
 void ElectricGuitar::plugIn(std::string cableColor)
 {
-    std::cout << "You have plugged in the " << cableColor << " cable into the " << ElectricGuitar::color <<  " " << ElectricGuitar::name <<std::endl;
+    std::cout << "You have plugged the " << cableColor << " cable into the " << ElectricGuitar::color <<  " " << ElectricGuitar::name <<std::endl;
 }
 
 void ElectricGuitar::selectPickup(int pickup)
@@ -119,7 +119,7 @@ void ElectricGuitar::selectPickup(int pickup)
 
 void ElectricGuitar::changeVolume(float volume)
 {
-    std::cout << "Changed Volume of " << ElectricGuitar::name <<" to " << volume << std::endl;
+    std::cout << "Changed volume of " << ElectricGuitar::name <<" to " << volume << std::endl;
 }
 
 void ElectricGuitar::GuitarString::breakString()
@@ -310,7 +310,7 @@ TvScreen::TvScreen()
 std::string TvScreen::displayImage(std::string imgName)
 {
     std::cout << "Displaying Image: " << imgName << std::endl;
-    return "This is a message from the TV-Screen: I'm now showing the Image: " + imgName;
+    return "This is a message from the TV-Screen: I'm now showing the Image " + imgName;
 }
 
 void TvScreen::changeBrightness(float brightness)
@@ -452,14 +452,14 @@ TvManufacturer::TvManufacturer()
 
 void TvManufacturer::goBankrupt(bool payAllDebts)
 {
-    std::cout << "Sorry - we're bankrup!! " ;
+    std::cout << TvManufacturer::name << " is bankrup!! " ;
     if (payAllDebts)
     {
-        std::cout << "But we will pay our debts!" << std::endl;
+        std::cout << "But they will pay their debts!" << std::endl;
     } 
     else
     {
-        std::cout << "And we will not pay our debts!" << std::endl;
+        std::cout << "And they will not pay their debts!" << std::endl;
     }
 }
 
@@ -471,8 +471,12 @@ bool TvManufacturer::releasNewModel(std::string modelName, float price)
 
 bool TvManufacturer::buyRivalCompany(std:: string company, float price)
 {
-    std::cout << TvManufacturer::name << " tried to buy " << company << " for $" << price  << std::endl;
-    return true;
+    std::cout << TvManufacturer::name << " tried to buy " << company << " for $" << price << ". ";
+    if (price > 999.f)
+    {
+        return true;
+    }
+    return false;
 }
 // ============================================================
 
@@ -544,7 +548,8 @@ void Tv::activateSmartTv(int menuItem)
 int main()
 {
     Example::main();
-    
+    std::cout << "============================================================" << std::endl;
+
     ElectricGuitar telecaster;
     telecaster.plugIn("green");
     telecaster.selectPickup(1);
@@ -581,7 +586,7 @@ int main()
     iPhone.sendMessage("Hey !!");
     iPhone.charge(); 
     bool updateSuccess = iPhone.updateOperatingSystem(11.2f);
-    std::cout << "The Update was succesful: " << (updateSuccess ? "The Update was succesful" : "Could not update!") << "\n";
+    std::cout << (updateSuccess ? "The Update was succesful" : "Could not update!") << "\n";
     std::cout << iPhone.manufacturer << " build this phone in " << iPhone.yearOfManufacture << "\n" << std::endl;
     
     MobilePhone nokiaPhone;
@@ -623,18 +628,22 @@ int main()
     TvManufacturer sony;
     sony.goBankrupt(false);
     sony.releasNewModel("TV2000x", 1299.99f);
-    std::cout << ( sony.buyRivalCompany("LG", 1.99f)?  "The offer was accepted" : "The offer was rejected") 
+    std::cout << ( sony.buyRivalCompany("LG", 1.99f) ?  "The offer was accepted" : "The offer was rejected" ) << "\n" << std::endl;
 
     TvManufacturer samsung;
+    samsung.name = "SAMSUNG";
     samsung.goBankrupt(true);
+    std::cout << ( samsung.buyRivalCompany("SONY", 1999.99f) ?  "The offer was accepted" : "The offer was rejected" ) << std::endl;
     std::cout << "============================================================" << std::endl;
 
-
-    Tv samsungTv;
-    samsungTv.changeChannel(11, true);
-    samsungTv.changeChannel(12, false);
-    samsungTv.changeVolume(12.2f, true);
-    samsungTv.activateSmartTv(3);
+    Tv toshibaTv;
+    toshibaTv.changeChannel(11, true);
+    toshibaTv.changeChannel(12, false);
+    toshibaTv.changeVolume(12.2f, true);
+    toshibaTv.activateSmartTv(3);
+    toshibaTv.manufacturer.name = "TOSHIBA";
+    std::cout << "You now have a new TV by " << toshibaTv.manufacturer.name << std::endl;
+    toshibaTv.manufacturer.goBankrupt(true);
 
     std::cout << "good to go!" << std::endl;
 }
