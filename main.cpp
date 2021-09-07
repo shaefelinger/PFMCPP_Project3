@@ -252,7 +252,7 @@ void MobilePhone::charge()
 
 bool MobilePhone::updateOperatingSystem(float osVersion)
 {
-    std::cout << "Updated Operating System to Version " << osVersion << " on this " << MobilePhone::manufacturer << "-phone from " << MobilePhone::yearOfManufacture << std::endl;
+    std::cout << "Updated Operating System to Version " << osVersion << " on this " << MobilePhone::manufacturer << "-phone from " << yearOfManufacture << std::endl;
     return true;
 }
 // ============================================================
