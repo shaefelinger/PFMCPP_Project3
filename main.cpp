@@ -205,7 +205,8 @@ void Computer::eraseDisk(std::string volumeName)
     std::cout << "Erased Disk " << volumeName << std::endl;
 }
 
-void Computer::powerOffCountdown() {
+void Computer::powerOffCountdown() 
+{
     int i = 10;
     while (i > 0)
     {
@@ -282,7 +283,8 @@ void Bus::drive (int distance)
         fuelUsed =  i * fuelConsumption / 100;
         fuelLeft =  fuelCapacity - fuelUsed;
 
-        if ( fuelLeft < 0 ) {
+        if ( fuelLeft < 0 ) 
+        {
             std::cout << "YOU RAN OUT OF FUEL!!!" << std::endl;
             break;
         }
