@@ -376,6 +376,14 @@ std::string TvScreen::getInfo()
 {
     return "This is a " + type + " screen with a refresh rate of " + std::to_string(refreshRate) + " Hz"; 
 }
+
+void TvScreen::displayTenImages() 
+{
+    for ( int i = 0; i < 10; i += 1)
+    {
+        displayImage("Crazy Cat " + std::to_string(i + 1) );
+    }
+}
 // ============================================================
 
 struct TvRemoteControl
@@ -498,7 +506,14 @@ struct TvOnScreenMenu
     void activateRecoding(int channel);
 
     void getLanguage();
-    void displayTenImages();
+
+    void getWeekGuide(int startWeek, int endWeek) 
+    {
+        for (int i = startWeek; i <= endWeek; i += 1)
+        {
+            showTVGuide(i);
+        }
+    }
 };
 
 TvOnScreenMenu::TvOnScreenMenu()
@@ -526,13 +541,7 @@ void TvOnScreenMenu::getLanguage()
     std::cout << "The onscreen-menu is displayed in " << language << ", but you can choose any of the " << numberOfLanguages <<" languages" << std::endl;
 }
 
-void TvScreen::displayTenImages() 
-{
-    for ( int i = 0; i < 10; i += 1)
-    {
-        displayImage("Crazy Cat " + std::to_string(i + 1) );
-    }
-}
+
 // ============================================================
 
 struct TvManufacturer
@@ -734,6 +743,7 @@ int main()
     samsungMenu.showTVGuide(22);
     samsungMenu.activateRecoding(12); 
     samsungMenu.getLanguage();
+    samsungMenu.getWeekGuide(4, 12);
     std::cout << "============================================================" << std::endl;
 
     TvManufacturer sony;
