@@ -442,6 +442,7 @@ struct TvConnectors
     void outputAudio(float volume = 6.2f, int output = 2);
     bool connectToAntenna();
     bool connectToPower(int powerSocket = 1);
+    void testOutputs();
 };
 
 TvConnectors::TvConnectors() : numberHdmiInputs(3), digitalOutType("spdif") 
@@ -465,6 +466,21 @@ bool TvConnectors::connectToPower(int powerSocket)
 {
     std::cout << "Connection to power socket " << powerSocket << " failed" << std::endl;
     return false;
+}
+
+void TvConnectors::testOutputs()
+{   
+    for ( int i = 0; i < numberHdmiInputs; i += 1)
+    {
+        std::cout << "Testing HDMI Input " << i + 1 << std::endl;
+    }
+
+    for ( int i = 0; i < numberHeadphoneOuts; i += 1)
+    {
+        std::cout << "Testing Headphone Output " << i + 1 << std::endl;
+    }
+
+    std::cout << "Testing " << digitalOutType << " Output" << std::endl;
 }
 // ============================================================
 
@@ -710,6 +726,7 @@ int main()
     std::cout << (samsungConnectors.connectToAntenna() ? "success!" : "failed!" ) << std::endl;;
     samsungConnectors.outputAudio(8.8f, 1);
     std::cout << "This TV has " << samsungConnectors.numberHdmiInputs << " HDMI inputs and " << samsungConnectors.numberHeadphoneOuts << " headphone outputs" << std::endl; 
+    samsungConnectors.testOutputs();
     std::cout << "============================================================" << std::endl;
 
     TvOnScreenMenu samsungMenu;
