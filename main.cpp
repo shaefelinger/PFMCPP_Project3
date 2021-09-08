@@ -287,7 +287,6 @@ void Bus::drive (int distance)
             break;
         }
 
-        std::cout.precision(3);
         std::cout << "You have driven " << i << " Km and used " << fuelUsed << " liters of fuel. You have " << fuelLeft << " liters left." << std::endl;
         i += 50;        
     }
@@ -541,7 +540,6 @@ void TvOnScreenMenu::getLanguage()
     std::cout << "The onscreen-menu is displayed in " << language << ", but you can choose any of the " << numberOfLanguages <<" languages" << std::endl;
 }
 
-
 // ============================================================
 
 struct TvManufacturer
@@ -556,6 +554,8 @@ struct TvManufacturer
     void goBankrupt(bool payAllDebts);
     bool releasNewModel(std::string modelName, float price);
     bool buyRivalCompany(std:: string company, float price);
+
+    void tryToBuyRival(std:: string company, float startingPrice);
 };
 
 TvManufacturer::TvManufacturer() : name("SONY"), headquartersLocation("Japan")
@@ -590,6 +590,17 @@ bool TvManufacturer::buyRivalCompany(std:: string company, float price)
         return true;
     }
     return false;
+}
+
+void TvManufacturer::tryToBuyRival(std:: string company, float startingPrice)
+{
+    float biddingPrice = startingPrice;
+    while( !buyRivalCompany(company, biddingPrice) )
+    {
+        std::cout << "The Offer was rejected!" << std::endl;
+        biddingPrice += 100.0f;
+    }
+    std::cout << "The Offer was finally accepted!" << std::endl;
 }
 // ============================================================
 
@@ -750,6 +761,7 @@ int main()
     sony.goBankrupt(false);
     sony.releasNewModel("TV2000x", 1299.99f);
     std::cout << ( sony.buyRivalCompany("LG", 1.99f) ?  "The offer was accepted" : "The offer was rejected" ) << "\n" << std::endl;
+    sony.tryToBuyRival("Grundig", 2.99f);
 
     TvManufacturer samsung;
     samsung.name = "SAMSUNG";
