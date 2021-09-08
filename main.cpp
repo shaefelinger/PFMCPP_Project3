@@ -484,7 +484,7 @@ void TvConnectors::testOutputs()
         std::cout << "Testing HDMI Input " << i + 1 << std::endl;
     }
 
-    for ( int i = 0; i < numberHeadphoneOuts; i += 1)
+    for ( int i = 0; i < numberHeadphoneOuts; ++i )
     {
         std::cout << "Testing Headphone Output " << i + 1 << std::endl;
     }
