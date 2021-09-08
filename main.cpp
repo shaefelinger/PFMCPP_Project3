@@ -99,6 +99,14 @@ struct ElectricGuitar
     void selectPickup(int pickup);
     void changeVolume(float volume);
 
+    void turnUpVolume()
+    {
+        for (int i = 0; i <= 20; ++i )
+        {
+            changeVolume( i * 0.5f );
+        }
+    }
+
     GuitarString string1; 
 };
 
@@ -172,6 +180,8 @@ struct Computer
         std::cout << "The Computer has " << amountOfRam << "GB of RAM and a processor speed of " << processorSpeed << " GHz" << std::endl;
     }
 
+    void powerOffCountdown();
+
     Application logicPro;
 };
 
@@ -194,6 +204,17 @@ void Computer::eraseDisk(std::string volumeName)
 {
     std::cout << "Erased Disk " << volumeName << std::endl;
 }
+
+void Computer::powerOffCountdown() 
+{
+    int i = 10;
+    while (i > 0)
+    {
+        std::cout << "Power off in " << i << std::endl;
+        --i;
+    }
+    shutDown();
+} 
 
 void Computer::Application::start()
 {
@@ -222,10 +243,13 @@ struct Bus
     int numberOfSeats;
     std::string manufacturer = "MAN";
     float fuelConsumption = 20.3f;
+    float fuelCapacity { 200.0f };
 
     void startEngine();
     void turnLeft(int angle);
     void openDoors(bool openAllDoors);
+
+    void drive (int distance);
 };
 
 void Bus::startEngine()
@@ -249,6 +273,26 @@ void Bus::openDoors(bool openAllDoors)
         std::cout << "Opened a single door" << std::endl;
     }
 }
+
+void Bus::drive (int distance) 
+{
+    float fuelLeft, fuelUsed;
+    int i = 0; 
+    while ( i <= distance )
+    {
+        fuelUsed =  i * fuelConsumption / 100;
+        fuelLeft =  fuelCapacity - fuelUsed;
+
+        if ( fuelLeft < 0 ) 
+        {
+            std::cout << "YOU RAN OUT OF FUEL!!!" << std::endl;
+            break;
+        }
+
+        std::cout << "You have driven " << i << " Km and used " << fuelUsed << " liters of fuel. You have " << fuelLeft << " liters left." << std::endl;
+        i += 50;        
+    }
+}
 // ============================================================
 
 struct MobilePhone
@@ -259,9 +303,10 @@ struct MobilePhone
     std::string manufacturer;
     std::string typeOfCamera = "none";
     int yearOfManufacture = 1995;
+    int chargingStatus { 12 };
 
     void sendMessage(std::string message);
-    void charge(); 
+    void charge(int percentage); 
     bool updateOperatingSystem(float osVersion);
 };
 
@@ -275,9 +320,14 @@ void MobilePhone::sendMessage(std::string message)
     std::cout << "Message sent: " << message << std::endl;
 }
 
-void MobilePhone::charge()
+void MobilePhone::charge(int percentage)
 {
-    std::cout << "Phone is charged!" << std::endl;
+    while (chargingStatus < percentage)
+    {
+        std::cout << "Charging Status: " << chargingStatus << std::endl;
+        chargingStatus += 5;
+    }
+    std::cout << "Phone is charged to " << percentage << "%" << std::endl;
 }
 
 bool MobilePhone::updateOperatingSystem(float osVersion)
@@ -303,8 +353,8 @@ struct TvScreen
     std::string displayImage(std::string imgName = "defaultImage");
     void changeBrightness(float brightness);
     void changeContrast(float contrast);
-
     std::string getInfo();
+    void displayTenImages();
 }; 
 
 std::string TvScreen::displayImage(std::string imgName)
@@ -327,6 +377,14 @@ std::string TvScreen::getInfo()
 {
     return "This is a " + type + " screen with a refresh rate of " + std::to_string(refreshRate) + " Hz"; 
 }
+
+void TvScreen::displayTenImages() 
+{
+    for ( int i = 0; i < 10; ++i )
+    {
+        displayImage("Crazy Cat " + std::to_string(i + 1) );
+    }
+}
 // ============================================================
 
 struct TvRemoteControl
@@ -341,6 +399,23 @@ struct TvRemoteControl
     void turnTvOn(int inputNumber = 0, int channelNumber = 1);
     void changeChannel(int channelNumber = 1);
     void changeVolume(float newVolume);
+
+    int pressRandomKnob() 
+    {
+        int knob = rand() % numberOfKnobs + 1; // not really random - the sequence is always the same
+        return knob;
+    }
+
+    void pressRandomKnobs(int amount)
+    {
+        std::cout << "Pressing random knobs: "; 
+        // srand(time(0)); // tried to get a more random sequence. but it produces errors. 
+        for ( int i = 0; i < amount; ++i )
+        {
+            std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : "");
+        }
+        std::cout << std::endl;
+    }
 };
 
 TvRemoteControl::TvRemoteControl()
@@ -376,6 +451,7 @@ struct TvConnectors
     void outputAudio(float volume = 6.2f, int output = 2);
     bool connectToAntenna();
     bool connectToPower(int powerSocket = 1);
+    void testOutputs();
 };
 
 TvConnectors::TvConnectors() : numberHdmiInputs(3), digitalOutType("spdif") 
@@ -400,6 +476,21 @@ bool TvConnectors::connectToPower(int powerSocket)
     std::cout << "Connection to power socket " << powerSocket << " failed" << std::endl;
     return false;
 }
+
+void TvConnectors::testOutputs()
+{   
+    for ( int i = 0; i < numberHdmiInputs; ++i )
+    {
+        std::cout << "Testing HDMI Input " << i + 1 << std::endl;
+    }
+
+    for ( int i = 0; i < numberHeadphoneOuts; ++i )
+    {
+        std::cout << "Testing Headphone Output " << i + 1 << std::endl;
+    }
+
+    std::cout << "Testing " << digitalOutType << " Output" << std::endl;
+}
 // ============================================================
 
 struct TvOnScreenMenu
@@ -416,6 +507,14 @@ struct TvOnScreenMenu
     void activateRecoding(int channel);
 
     void getLanguage();
+
+    void getWeekGuide(int startWeek, int endWeek) 
+    {
+        for (int i = startWeek; i <= endWeek; ++i )
+        {
+            showTVGuide(i);
+        }
+    }
 };
 
 TvOnScreenMenu::TvOnScreenMenu()
@@ -457,6 +556,8 @@ struct TvManufacturer
     void goBankrupt(bool payAllDebts);
     bool releasNewModel(std::string modelName, float price);
     bool buyRivalCompany(std:: string company, float price);
+
+    void tryToBuyRival(std:: string company, float startingPrice);
 };
 
 TvManufacturer::TvManufacturer() : name("SONY"), headquartersLocation("Japan")
@@ -492,6 +593,17 @@ bool TvManufacturer::buyRivalCompany(std:: string company, float price)
     }
     return false;
 }
+
+void TvManufacturer::tryToBuyRival(std:: string company, float startingPrice)
+{
+    float biddingPrice = startingPrice;
+    while( !buyRivalCompany(company, biddingPrice) )
+    {
+        std::cout << "The Offer was rejected!" << std::endl;
+        biddingPrice += 100.0f;
+    }
+    std::cout << "The Offer was finally accepted!" << std::endl;
+}
 // ============================================================
 
 struct Tv
@@ -506,6 +618,8 @@ struct Tv
     void changeChannel(int channelNumber, bool useRemoteControl);
     void changeVolume(float newVolume, bool useRemoteControl);
     void activateSmartTv(int menuItem = 0);
+
+    void fadeOut(float startingVolume);
 };
 
 Tv::Tv()
@@ -535,13 +649,24 @@ void Tv::changeVolume(float newVolume, bool useRemoteControl)
     }
     else
     {
-        std::cout << "." << std::endl;
+        std::cout << std::endl;
     }
 }
 
 void Tv::activateSmartTv(int menuItem)
 {
     std::cout << "SmartTV-Menu Item " << menuItem << " activated!" << std::endl;
+}
+
+void Tv::fadeOut(float startingVolume)
+{
+    float i = startingVolume;
+    while ( i > 0 )
+    {
+        changeVolume(i, false);
+        i -= 0.5f;
+    }
+    changeVolume(0, false);
 }
 
 /*
@@ -572,6 +697,7 @@ int main()
     telecaster.string1.pluckString(12);
     std::cout << "Price: " << telecaster.price << std::endl;
     std::cout << "String-Manufacturer: " << telecaster.string1.manufacturer << std::endl;
+    telecaster.turnUpVolume();
     std::cout << "============================================================" << std::endl;
 
     Computer macbook;
@@ -584,6 +710,8 @@ int main()
     macbook.showInfo();
     
     std::cout << macbook.logicPro.name << " by " << macbook.logicPro.manufacturer << " has a size of " << macbook.logicPro.size << " GB" << std::endl;
+
+    macbook.powerOffCountdown();
     std::cout << "============================================================" << std::endl;
 
     Bus schoolBus;
@@ -592,20 +720,21 @@ int main()
     schoolBus.openDoors(false);
     schoolBus.openDoors(true);
     std::cout << "This Bus made by " << schoolBus.manufacturer << " has " << schoolBus.numberOfSeats << " Seats and a maxiumum speed of " << schoolBus.maximumSpeed << " km/h" << std::endl;
+    schoolBus.drive(1500);
     std::cout << "============================================================" << std::endl;
 
     MobilePhone iPhone;
     iPhone.manufacturer = "Apple";
     iPhone.yearOfManufacture = 2018;
     iPhone.sendMessage("Hey !!");
-    iPhone.charge(); 
+    iPhone.charge(55); 
     bool updateSuccess = iPhone.updateOperatingSystem(11.2f);
     std::cout << (updateSuccess ? "The Update was succesful" : "Could not update!") << "\n";
     std::cout << iPhone.manufacturer << " build this phone in " << iPhone.yearOfManufacture << "\n" << std::endl;
     
     MobilePhone nokiaPhone;
     nokiaPhone.sendMessage("A message from the Nokia");
-    nokiaPhone.charge();
+    nokiaPhone.charge(99);
     nokiaPhone.updateOperatingSystem(1.2f);
     std::cout << nokiaPhone.manufacturer << " build this phone in " << nokiaPhone.yearOfManufacture << std::endl;
     std::cout << "============================================================" << std::endl;
@@ -616,6 +745,7 @@ int main()
     samsungScreen.changeBrightness(12.3f);
     samsungScreen.changeContrast(22.43f);
     std::cout << samsungScreen.getInfo() << std::endl;
+    samsungScreen.displayTenImages();
     std::cout << "============================================================" << std::endl;
 
     TvRemoteControl samsungRemote;
@@ -623,6 +753,7 @@ int main()
     samsungRemote.changeChannel(4);
     samsungRemote.changeVolume(11.2f);
     std::cout << "You are using a " << samsungRemote.color << " " << samsungRemote.type << " remote with " << samsungRemote.numberOfKnobs << " knobs" << std::endl;
+    samsungRemote.pressRandomKnobs(10);
     std::cout << "============================================================" << std::endl;
 
     TvConnectors samsungConnectors;
@@ -630,6 +761,7 @@ int main()
     std::cout << (samsungConnectors.connectToAntenna() ? "success!" : "failed!" ) << std::endl;;
     samsungConnectors.outputAudio(8.8f, 1);
     std::cout << "This TV has " << samsungConnectors.numberHdmiInputs << " HDMI inputs and " << samsungConnectors.numberHeadphoneOuts << " headphone outputs" << std::endl; 
+    samsungConnectors.testOutputs();
     std::cout << "============================================================" << std::endl;
 
     TvOnScreenMenu samsungMenu;
@@ -637,12 +769,14 @@ int main()
     samsungMenu.showTVGuide(22);
     samsungMenu.activateRecoding(12); 
     samsungMenu.getLanguage();
+    samsungMenu.getWeekGuide(4, 12);
     std::cout << "============================================================" << std::endl;
 
     TvManufacturer sony;
     sony.goBankrupt(false);
     sony.releasNewModel("TV2000x", 1299.99f);
     std::cout << ( sony.buyRivalCompany("LG", 1.99f) ?  "The offer was accepted" : "The offer was rejected" ) << "\n" << std::endl;
+    sony.tryToBuyRival("Grundig", 2.99f);
 
     TvManufacturer samsung;
     samsung.name = "SAMSUNG";
@@ -655,6 +789,7 @@ int main()
     toshibaTv.changeChannel(12, false);
     toshibaTv.changeVolume(12.2f, true);
     toshibaTv.activateSmartTv(3);
+    toshibaTv.fadeOut(8.8f);
     toshibaTv.manufacturer.name = "TOSHIBA";
     std::cout << "You now have a new TV by " << toshibaTv.manufacturer.name << std::endl;
     toshibaTv.manufacturer.goBankrupt(true);
