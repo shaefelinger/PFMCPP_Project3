@@ -400,14 +400,14 @@ struct TvRemoteControl
 
     int pressRandomKnob() 
     {
-        int knob = rand() % numberOfKnobs + 1;
+        int knob = rand() % numberOfKnobs + 1; // not really random - the sequence is always the same
         return knob;
     }
 
     void pressRandomKnobs(int amount)
     {
         std::cout << "Pressing random knobs: "; 
-        // srand(time(0)); // to get a more random sequence. but it produces errors. 
+        // srand(time(0)); // tried to get a more random sequence. but it produces errors. 
         for ( int i = 0; i < amount; i += 1  )
         {
             std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : " - done");
@@ -616,6 +616,8 @@ struct Tv
     void changeChannel(int channelNumber, bool useRemoteControl);
     void changeVolume(float newVolume, bool useRemoteControl);
     void activateSmartTv(int menuItem = 0);
+
+    void fadeOut(float startingVolume);
 };
 
 Tv::Tv()
@@ -652,6 +654,17 @@ void Tv::changeVolume(float newVolume, bool useRemoteControl)
 void Tv::activateSmartTv(int menuItem)
 {
     std::cout << "SmartTV-Menu Item " << menuItem << " activated!" << std::endl;
+}
+
+void Tv::fadeOut(float startingVolume)
+{
+    float i = startingVolume;
+    while ( i > 0 )
+    {
+        changeVolume(i, false);
+        i -= 0.5f;
+    }
+    changeVolume(0, false);
 }
 
 /*
@@ -774,6 +787,7 @@ int main()
     toshibaTv.changeChannel(12, false);
     toshibaTv.changeVolume(12.2f, true);
     toshibaTv.activateSmartTv(3);
+    toshibaTv.fadeOut(8.8f);
     toshibaTv.manufacturer.name = "TOSHIBA";
     std::cout << "You now have a new TV by " << toshibaTv.manufacturer.name << std::endl;
     toshibaTv.manufacturer.goBankrupt(true);
