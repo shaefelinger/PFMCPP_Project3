@@ -99,6 +99,14 @@ struct ElectricGuitar
     void selectPickup(int pickup);
     void changeVolume(float volume);
 
+    void turnUpVolume()
+    {
+        for (int i = 0; i <= 20; i += 1 )
+        {
+            changeVolume( i * 0.5f );
+        }
+    }
+
     GuitarString string1; 
 };
 
@@ -172,6 +180,8 @@ struct Computer
         std::cout << "The Computer has " << amountOfRam << "GB of RAM and a processor speed of " << processorSpeed << " GHz" << std::endl;
     }
 
+    void powerOffCountdown();
+
     Application logicPro;
 };
 
@@ -194,6 +204,16 @@ void Computer::eraseDisk(std::string volumeName)
 {
     std::cout << "Erased Disk " << volumeName << std::endl;
 }
+
+void Computer::powerOffCountdown() {
+    int i = 10;
+    while (i > 0)
+    {
+        std::cout << "Power off in " << i << std::endl;
+        i -= 1;
+    }
+    shutDown();
+} 
 
 void Computer::Application::start()
 {
@@ -222,10 +242,13 @@ struct Bus
     int numberOfSeats;
     std::string manufacturer = "MAN";
     float fuelConsumption = 20.3f;
+    float fuelCapacity { 200.0f };
 
     void startEngine();
     void turnLeft(int angle);
     void openDoors(bool openAllDoors);
+
+    void drive (int distance);
 };
 
 void Bus::startEngine()
@@ -249,6 +272,26 @@ void Bus::openDoors(bool openAllDoors)
         std::cout << "Opened a single door" << std::endl;
     }
 }
+
+void Bus::drive (int distance) 
+{
+    float fuelLeft, fuelUsed;
+    int i = 0; 
+    while ( i <= distance )
+    {
+        fuelUsed =  i * fuelConsumption / 100;
+        fuelLeft =  fuelCapacity - fuelUsed;
+
+        if ( fuelLeft < 0 ) {
+            std::cout << "YOU RAN OUT OF FUEL!!!" << std::endl;
+            break;
+        }
+
+        std::cout.precision(3);
+        std::cout << "You have driven " << i << " Km and used " << fuelUsed << " liters of fuel. You have " << fuelLeft << " liters left." << std::endl;
+        i += 50;        
+    }
+}
 // ============================================================
 
 struct MobilePhone
@@ -259,9 +302,10 @@ struct MobilePhone
     std::string manufacturer;
     std::string typeOfCamera = "none";
     int yearOfManufacture = 1995;
+    int chargingStatus { 12 };
 
     void sendMessage(std::string message);
-    void charge(); 
+    void charge(int percentage); 
     bool updateOperatingSystem(float osVersion);
 };
 
@@ -275,9 +319,14 @@ void MobilePhone::sendMessage(std::string message)
     std::cout << "Message sent: " << message << std::endl;
 }
 
-void MobilePhone::charge()
+void MobilePhone::charge(int percentage)
 {
-    std::cout << "Phone is charged!" << std::endl;
+    while (chargingStatus < percentage)
+    {
+        std::cout << "Charging Status: " << chargingStatus << std::endl;
+        chargingStatus += 5;
+    }
+    std::cout << "Phone is charged to " << percentage << "%" << std::endl;
 }
 
 bool MobilePhone::updateOperatingSystem(float osVersion)
@@ -303,8 +352,8 @@ struct TvScreen
     std::string displayImage(std::string imgName = "defaultImage");
     void changeBrightness(float brightness);
     void changeContrast(float contrast);
-
     std::string getInfo();
+    void displayTenImages();
 }; 
 
 std::string TvScreen::displayImage(std::string imgName)
@@ -341,6 +390,23 @@ struct TvRemoteControl
     void turnTvOn(int inputNumber = 0, int channelNumber = 1);
     void changeChannel(int channelNumber = 1);
     void changeVolume(float newVolume);
+
+    int pressRandomKnob() 
+    {
+        int knob = rand() % numberOfKnobs + 1;
+        return knob;
+    }
+
+    void pressRandomKnobs(int amount)
+    {
+        std::cout << "Pressing random knobs: "; 
+        // srand(time(0)); // to get a more random sequence. but it produces errors. 
+        for ( int i = 0; i < amount; i += 1  )
+        {
+            std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : " - done");
+        }
+        std::cout << std::endl;
+    }
 };
 
 TvRemoteControl::TvRemoteControl()
@@ -416,6 +482,7 @@ struct TvOnScreenMenu
     void activateRecoding(int channel);
 
     void getLanguage();
+    void displayTenImages();
 };
 
 TvOnScreenMenu::TvOnScreenMenu()
@@ -443,6 +510,13 @@ void TvOnScreenMenu::getLanguage()
     std::cout << "The onscreen-menu is displayed in " << language << ", but you can choose any of the " << numberOfLanguages <<" languages" << std::endl;
 }
 
+void TvScreen::displayTenImages() 
+{
+    for ( int i = 0; i < 10; i += 1)
+    {
+        displayImage("Crazy Cat " + std::to_string(i + 1) );
+    }
+}
 // ============================================================
 
 struct TvManufacturer
@@ -572,6 +646,7 @@ int main()
     telecaster.string1.pluckString(12);
     std::cout << "Price: " << telecaster.price << std::endl;
     std::cout << "String-Manufacturer: " << telecaster.string1.manufacturer << std::endl;
+    telecaster.turnUpVolume();
     std::cout << "============================================================" << std::endl;
 
     Computer macbook;
@@ -584,6 +659,8 @@ int main()
     macbook.showInfo();
     
     std::cout << macbook.logicPro.name << " by " << macbook.logicPro.manufacturer << " has a size of " << macbook.logicPro.size << " GB" << std::endl;
+
+    macbook.powerOffCountdown();
     std::cout << "============================================================" << std::endl;
 
     Bus schoolBus;
@@ -592,20 +669,21 @@ int main()
     schoolBus.openDoors(false);
     schoolBus.openDoors(true);
     std::cout << "This Bus made by " << schoolBus.manufacturer << " has " << schoolBus.numberOfSeats << " Seats and a maxiumum speed of " << schoolBus.maximumSpeed << " km/h" << std::endl;
+    schoolBus.drive(1500);
     std::cout << "============================================================" << std::endl;
 
     MobilePhone iPhone;
     iPhone.manufacturer = "Apple";
     iPhone.yearOfManufacture = 2018;
     iPhone.sendMessage("Hey !!");
-    iPhone.charge(); 
+    iPhone.charge(55); 
     bool updateSuccess = iPhone.updateOperatingSystem(11.2f);
     std::cout << (updateSuccess ? "The Update was succesful" : "Could not update!") << "\n";
     std::cout << iPhone.manufacturer << " build this phone in " << iPhone.yearOfManufacture << "\n" << std::endl;
     
     MobilePhone nokiaPhone;
     nokiaPhone.sendMessage("A message from the Nokia");
-    nokiaPhone.charge();
+    nokiaPhone.charge(99);
     nokiaPhone.updateOperatingSystem(1.2f);
     std::cout << nokiaPhone.manufacturer << " build this phone in " << nokiaPhone.yearOfManufacture << std::endl;
     std::cout << "============================================================" << std::endl;
@@ -616,6 +694,7 @@ int main()
     samsungScreen.changeBrightness(12.3f);
     samsungScreen.changeContrast(22.43f);
     std::cout << samsungScreen.getInfo() << std::endl;
+    samsungScreen.displayTenImages();
     std::cout << "============================================================" << std::endl;
 
     TvRemoteControl samsungRemote;
@@ -623,6 +702,7 @@ int main()
     samsungRemote.changeChannel(4);
     samsungRemote.changeVolume(11.2f);
     std::cout << "You are using a " << samsungRemote.color << " " << samsungRemote.type << " remote with " << samsungRemote.numberOfKnobs << " knobs" << std::endl;
+    samsungRemote.pressRandomKnobs(10);
     std::cout << "============================================================" << std::endl;
 
     TvConnectors samsungConnectors;
