@@ -101,7 +101,7 @@ struct ElectricGuitar
 
     void turnUpVolume()
     {
-        for (int i = 0; i <= 20; i += 1 )
+        for (int i = 0; i <= 20; ++i )
         {
             changeVolume( i * 0.5f );
         }
@@ -211,7 +211,7 @@ void Computer::powerOffCountdown()
     while (i > 0)
     {
         std::cout << "Power off in " << i << std::endl;
-        i -= 1;
+        --i;
     }
     shutDown();
 } 
@@ -380,7 +380,7 @@ std::string TvScreen::getInfo()
 
 void TvScreen::displayTenImages() 
 {
-    for ( int i = 0; i < 10; i += 1)
+    for ( int i = 0; i < 10; ++i )
     {
         displayImage("Crazy Cat " + std::to_string(i + 1) );
     }
@@ -410,7 +410,7 @@ struct TvRemoteControl
     {
         std::cout << "Pressing random knobs: "; 
         // srand(time(0)); // tried to get a more random sequence. but it produces errors. 
-        for ( int i = 0; i < amount; i += 1  )
+        for ( int i = 0; i < amount; ++i )
         {
             std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : "");
         }
@@ -479,7 +479,7 @@ bool TvConnectors::connectToPower(int powerSocket)
 
 void TvConnectors::testOutputs()
 {   
-    for ( int i = 0; i < numberHdmiInputs; i += 1)
+    for ( int i = 0; i < numberHdmiInputs; ++i )
     {
         std::cout << "Testing HDMI Input " << i + 1 << std::endl;
     }
@@ -510,7 +510,7 @@ struct TvOnScreenMenu
 
     void getWeekGuide(int startWeek, int endWeek) 
     {
-        for (int i = startWeek; i <= endWeek; i += 1)
+        for (int i = startWeek; i <= endWeek; ++i )
         {
             showTVGuide(i);
         }
