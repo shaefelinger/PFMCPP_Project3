@@ -410,7 +410,7 @@ struct TvRemoteControl
         // srand(time(0)); // tried to get a more random sequence. but it produces errors. 
         for ( int i = 0; i < amount; i += 1  )
         {
-            std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : " - done");
+            std::cout << pressRandomKnob() << ( (i < amount - 1) ? " - " : "");
         }
         std::cout << std::endl;
     }
@@ -647,7 +647,7 @@ void Tv::changeVolume(float newVolume, bool useRemoteControl)
     }
     else
     {
-        std::cout << "." << std::endl;
+        std::cout << std::endl;
     }
 }
 
